@@ -1,0 +1,581 @@
+{
+  "skill_name": "photo-watercolor-editorial",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "用这张从正上方随手拍、身体结构几乎无法辨认的小鸟照片做一张 photo-watercolor-editorial 海报，不要放原照片。",
+      "expected_output": "Selects poster-only and controlled abstraction. It preserves a bird reading only if category and a coherent top-down envelope remain reliable; otherwise it uses nonliteral fallback. It never invents a side-view pose, anatomy, species markings, blurry pseudo-features, or source-photo pixels.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "用这张俯拍餐盘照片做海报，不需要原片；盘中食物的放射排列是重点。",
+      "expected_output": "Recognizes that top-down clearly supports the radial relation. Uses poster-only evidence extraction or watercolor reinterpretation rather than treating the angle as a defect, and keeps the source file untouched.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "这张花的照片背景很乱，但花、花瓣和茎都看得清。只生成水彩海报。",
+      "expected_output": "Uses poster-only evidence extraction, removes background clutter from the generated poster without modifying the upload, and renders translucent watercolor overlaps through compact text-only medium guidance.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "保留这张街景原片，同时做成 photo-watercolor-editorial 水彩编辑海报。",
+      "expected_output": "Selects include-original. Embeds a pixel-faithful rendering of the source with only output-only crop, scale, rotation, horizon correction, or placement, while the surrounding field uses the locked watercolor style.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "这张严重欠曝的品牌产品照片主体很小，但还是只做一张好看的 poster，不要原片。",
+      "expected_output": "Uses poster-only controlled abstraction. Because the exact product category and geometry are not reliable, it may use nonliteral light, color, mass, and rhythm without inventing branded geometry, text, logo, blurry pseudo-construction, or product details and without asking for another photo by default.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "调用 photo-watercolor-editorial 处理这张普通随手拍。",
+      "expected_output": "Defaults to poster-only and auto composition, leaves the upload unchanged, locks the smallest literal subject before geometry, and applies transparent watercolor with no source pixels. It keeps only indispensable support, temporarily removes the remaining scene, and restores no more than one structural trace and one atmospheric trace when their absence would make the result generic. It never treats the whole snapshot as protected content.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "这张夜间照片里，左侧三花猫低位横向延伸并向右靠近，右侧黑白猫位于更高的右侧、身体更纵向并朝左回应，接触点偏右。没有指定构图模式，调用 photo-watercolor-editorial，不放原片。",
+      "expected_output": "Auto resolves to source-locked because the unequal placement and offset interaction are the image's salient event. It preserves exactly two recognizable cats, left-right order, low-left versus high-right placement, unequal body axes and heights, relative scale, opposing head direction, and the right-offset contact point. It resolves face policy independently for each cat: reliable eye placement, gaze, muzzle relation, and major face markings remain as a few intentional shapes; an unreadable face uses animal-structure-only without guessed marks. It omits unsupported mouth microstructure, paws, fur, and noisy markings. It must not blur the faces or normalize the pair into a symmetric same-baseline display.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "照片里有三个人在远处并肩走，人数、姿态和行进方向看得清，但脸和衣服看不清。只做海报。",
+      "expected_output": "Defaults to faceless false but selects human-structure-face for each distant person because internal landmarks are unreliable. It preserves three distinct continuous figures through count, unequal spacing and height, body lean, grounding, head direction, and shared walking direction. Each head keeps a coherent low-detail value structure without eye-like dots, partial lips, invented identity, or a deliberate blank faceless aesthetic. It preserves any reliable arm-to-hand gesture or contact but does not invent unsupported fingers or clothing detail, and it does not merge the group into a watercolor stain.",
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "这是一张有运动模糊的自行车照片，两只车轮、车架方向和骑行方向还看得出来，但辐条和零件不清楚。不要原片。",
+      "expected_output": "Preserves a coherent simplified bicycle reading through the supported two-wheel relation, frame axis, ground relation, and direction. It omits spokes, branding, controls, and uncertain parts instead of producing warped wheels or blurry mechanical fragments.",
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "这张严重失焦照片只有一团亮色和一个深色遮挡，无法可靠判断是什么物体或有几个主体，但仍然生成好看的 photo-watercolor-editorial 海报。",
+      "expected_output": "Uses fully nonliteral controlled abstraction only because category and count themselves are unreliable, not merely because facial or microscopic detail is weak. It preserves supported light, palette, overlap, direction, and negative space without inventing a person, animal, object, count, or title claim.",
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "这张夜间照片里有两只面对面靠近的猫。使用 editorial-recompose，大胆重新构图，不必照搬原位置；不要放原片。",
+      "expected_output": "Uses poster-only editorial-recompose. It may independently reposition, resize, space, and simplify the two cats while keeping each chosen primary envelope complete inside the canvas. It preserves exactly two recognizable cats, their source-supported posture, viewpoint, and meeting event. It preserves reliable animal facial landmarks as a few intentional shapes but does not invent gaze, expression, identity, a sitting pose, embrace, attack, or different event.",
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "一朵清晰的花偏在画面角落，周围背景很杂乱，也没有主体互动。使用 auto 构图，只生成海报。",
+      "expected_output": "Auto resolves to editorial-recompose because the flower's original placement is incidental and there is no salient multi-subject relation to preserve. It may reposition, enlarge, and simplify the flower and crop only incidental surroundings while keeping all source-supported decisive petals inside the canvas. It removes background clutter while preserving flower category, count, main silhouette, and color evidence.",
+      "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "用一张脸部清晰的单人正面生活照制作 poster-only photo-watercolor-editorial 海报。不要画五官，但人物仍要生动可辨。",
+      "expected_output": "Treats the explicit request not to draw facial features as faceless true and uses a clean complete faceless facial color plane with no isolated internal mark, blur, deletion hole, or pseudo-feature. It preserves the source-supported frontal head direction, hairstyle, shoulder-neck relation, body axis, posture, center of gravity, and continuous contour. Hair, head, torso, and limbs remain large connected structure-bearing shapes with calm coherent interiors and broad value travel. It does not invent a profile, rear view, lowered head, hair curtain, hand, or shadow to hide the face.",
+      "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "这张单只动物照片的细节有些模糊，但类别、朝向和轮廓可靠。用 photo-watercolor-editorial 只生成海报。",
+      "expected_output": "Keeps one recognizable continuous animal through category, head direction, body axis, back-belly envelope, grounding, major color divisions, and the minimum decisive ear, beak, horn, muzzle, or snout contour supported by the source. It first tests facial evidence. If at least two consistent landmarks are reliable, it uses animal-simplified-face and preserves only those landmarks; otherwise it uses animal-structure-only with a clean head interior. It omits unsupported mouth microstructure, toes, claws, fur, and uncertain limb detail without turning the subject into a blob or inventing pseudo-features.",
+      "files": []
+    },
+    {
+      "id": 15,
+      "prompt": "照片里两个人一高一低、错位站立并有偏左的接触点。使用 source-locked 和无五官处理，不放原片。",
+      "expected_output": "Treats the explicit no-features request as faceless true. Faceless treatment simplifies only inside the two figures and preserves relative centers, scale, height difference, axes, facing direction, spacing, offset contact point, overlap, grounding, and negative-space signature. The pair may move or scale only as one relational group; clean faceless planes must not cause recentering, equalization, same-baseline alignment, re-posing, or invented occlusion.",
+      "files": []
+    },
+    {
+      "id": 16,
+      "prompt": "这张人物照片有复杂礼服、珠饰、地面倒影和柔和背景。用 photo-watercolor-editorial 生成 poster-only 海报；可以简化装饰，但绝不能出现点彩、AI 噪点或由小色片堆成的水彩效果。",
+      "expected_output": "Preserves the reliable person, pose, hands, support, and reflection relation while compressing costume, jewelry, floor, reflection, and background into a few large connected regions. Structure-bearing shapes use calm coherent interiors and one dominant broad mark scale. Beads and lace become a continuous line, one simplified contour, or a large color role rather than repeated micro-marks. Broad connected watercolor variation is acceptable in the skirt, reflection, and background when subordinate to form; localized high-frequency digital mottling or particulate shading inside hair, face, hands, or other defining shapes is rejected.",
+      "files": []
+    },
+    {
+      "id": 17,
+      "prompt": "人物穿深色衣服坐在浅色背景前，头发和上身是清晰主体，背景有自然水彩晕染。用 photo-watercolor-editorial 只生成一次 poster-only 海报。",
+      "expected_output": "The hair, head, and torso remain large connected structure-bearing shapes with calm interiors and broad slow value transitions. The lighter background may contain broader blooms and pooling. Natural watercolor variation is not globally removed, but high-frequency micro-mottling and repeated small shading marks do not appear inside the dark subject masses. The skill generates once and does not automatically run an image-to-image cleanup pass.",
+      "files": []
+    },
+    {
+      "id": 18,
+      "prompt": "一只黑色动物站在草地边，轮廓和朝向清楚，但毛发很杂。只生成 photo-watercolor-editorial 海报。",
+      "expected_output": "Preserves one recognizable continuous animal with decisive head and body contours, grounding, and broad dark color mass. Dense fur frequency becomes a broad connected value role rather than many small marks. The surrounding grass or atmosphere may use broader directional washes, while the animal interior stays calmer and does not acquire synthetic speckle or pseudo-anatomy.",
+      "files": []
+    },
+    {
+      "id": 19,
+      "prompt": "这张建筑照片里主体立面和拱门清晰，天空与树影比较松散。调用 photo-watercolor-editorial，保留建筑辨识度但不要照片像素。",
+      "expected_output": "Uses poster-only. The building mass, roofline, opening rhythm, and decisive arch remain coherent structure-bearing shapes with broad connected tone. Sky and secondary tree-shadow fields may carry larger blooms, pooling, and soft edge variation. Surface texture never substitutes for architectural construction or creates a grid of tiny fragments.",
+      "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "照片里树叶很多、背景复杂，但人物轮廓和前进方向明确。用 auto 做简约水彩海报。",
+      "expected_output": "Locks the person and maintains reliable posture, direction, and any auto-resolved relationship geometry. Dense foliage is removed first. If the remaining person becomes generic without a place cue, restore only one muted green atmospheric wash or sparse directional rhythm; do not preserve leaf count, branch geometry, or full background perspective. The person remains the calmest readable structure and the prompt names only selected drawable content.",
+      "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "这是一张正面近距离猫咪照片，双眼位置、视线、鼻子和口鼻部关系都很清楚。用 photo-watercolor-editorial 做 poster-only 水彩海报。",
+      "expected_output": "Selects animal-simplified-face rather than a blank faceless plane. It preserves the source-supported two-eye placement and gaze, nose-to-muzzle relationship, ear direction, and major facial color divisions as a few clean intentional watercolor or ink shapes. It simplifies pupil highlights, whisker count, fur strands, and mouth microstructure without inventing a cute expression, symmetry, or breed detail.",
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "这只狗是侧脸，只能看见一只眼睛，但眼位、鼻梁和口鼻方向都很明确。调用 photo-watercolor-editorial。",
+      "expected_output": "Selects animal-simplified-face and respects the source-supported profile. It renders one visible intentional eye, the nose-to-muzzle axis, head direction, and decisive ear contour. It does not mirror a second eye, turn the dog toward the viewer, or invent a new expression or viewpoint.",
+      "files": []
+    },
+    {
+      "id": 23,
+      "prompt": "远处有一只猫，身体、耳朵和头部朝向看得清，但脸部内部只有几个无法确认的亮点。只生成海报。",
+      "expected_output": "Selects animal-structure-only because internal landmarks are unreliable. It preserves the complete cat envelope, ear direction, head orientation, body axis, and grounding while keeping the face interior calm. It does not convert uncertain light flecks into eyes or nostrils and does not treat the structure-only fallback as the default for clearer animal faces.",
+      "files": []
+    },
+    {
+      "id": 24,
+      "prompt": "照片里人物抱着一只面部清晰的猫。人物保持无五官，但猫的表情和视线要保留，构图使用 source-locked。",
+      "expected_output": "Treats the explicit request that the person remain without features as faceless true, then uses different branches within one source-locked group: human-faceless for the person and animal-simplified-face for the cat. It preserves the person's head direction and gesture plus the cat's reliable eye placement, gaze, muzzle relation, and facial color divisions. Treatment does not alter the embrace, contact points, relative centers, scale, axes, or occlusion, and the prompt emits one compact instruction per represented subject type.",
+      "files": []
+    },
+    {
+      "id": 25,
+      "prompt": "原图里两只燕子和展开的翅膀都看得完整，停在一根对角电线上。用 source-locked 做 poster-only 海报，翼尖不要被画面截断。",
+      "expected_output": "Selects source-complete. It preserves exactly two swallows, their unequal high-low placement, body axes, wing states, spacing, and diagonal-wire relationship. It uniformly scales or translates the whole relational group so both complete source-supported envelopes, including every wingtip and tail tip, fit inside the ivory canvas with breathing room. The secondary wire may bleed off the edge; neither bird may be cropped.",
+      "files": []
+    },
+    {
+      "id": 26,
+      "prompt": "这朵花有一片花瓣尖端刚好被原照片边缘裁掉一点，连接、方向和长度都可以可靠判断。只生成完整主体海报。",
+      "expected_output": "Selects supported-envelope-completion. It completes only the small constrained petal tip as one simple continuous outer shape, adds no invented veins or texture, and fits the complete flower envelope inside the safe area. The completion preserves source viewpoint, petal attachment, direction, scale, and all visible geometry.",
+      "files": []
+    },
+    {
+      "id": 27,
+      "prompt": "照片只拍到一个人物的上半身，看不到腰部以下，但我希望生成好看的 photo-watercolor-editorial 海报。使用 source-locked。",
+      "expected_output": "Selects unsupported-completion for a literal full body. Because source-locked outranks speculation, it does not invent legs, stance, footwear, or a full-body pose. It preserves the supported upper-body scaffold and uses an honest partial or nonliteral treatment rather than claiming source-specific completion.",
+      "files": []
+    },
+    {
+      "id": 28,
+      "prompt": "照片只出现某个物体的一小角，类别也无法可靠确认，但仍做一张主体完整的 editorial-recompose 海报。",
+      "expected_output": "Uses unsupported-completion and nonliteral fallback. It creates a complete abstract motif from supported color, direction, mass, overlap, and rhythm without naming or literally completing an unknown object. It does not invent product geometry, anatomy, identity, or a misleading category-level subject.",
+      "files": []
+    },
+    {
+      "id": 29,
+      "prompt": "保留这张主体被原照片边缘截断的原片，同时在外部做 photo-watercolor-editorial 水彩重释。",
+      "expected_output": "Uses include-original. The embedded source region honestly retains its original crop and is not extended or reconstructed. Subject Completeness applies only to generated watercolor interpretation outside that region, using supported minimal completion or a generalized fallback according to evidence.",
+      "files": []
+    },
+    {
+      "id": 30,
+      "prompt": "调用 photo-watercolor-editorial 做 poster-only 海报，要求背景保留原版干净象牙色面板的感觉，但仍然是水彩纸。",
+      "expected_output": "Uses one continuous neutral ivory ground anchored at #F3F0E8 across the canvas. Unpainted negative space stays even, quiet, and dominant, with only subtle neutral uniform watercolor-paper tooth. Broad blooms and pooling remain confined to intentional painted regions; no all-over wash, gradient, colored haze, vignette, stain, or texture overlay dirties the ivory field. The title sits in clean ivory negative space.",
+      "files": []
+    },
+    {
+      "id": 31,
+      "prompt": "用 photo-watercolor-editorial 处理一张站立人物照片，没有指定横竖版。人物完整、身体轴线明显纵向。",
+      "expected_output": "Uses orientation_mode auto and selects portrait near 3:5. Portrait preserves the complete standing envelope at a stronger scale, supports the vertical body axis, and leaves viable ivory title space. The image generator receives only the selected portrait direction and a short reason, not both candidates or the scoring table.",
+      "files": []
+    },
+    {
+      "id": 32,
+      "prompt": "照片里五个人横向并排，左右间隔和共同前进方向是重点。调用 photo-watercolor-editorial 自动选择画布。",
+      "expected_output": "Selects landscape near 5:3 because it preserves all five complete figures, their horizontal intervals, and a useful subject scale without changing the event. Portrait is rejected if it would shrink the group below thumbnail readability or compress the protected spacing. The generated prompt contains only the landscape outcome.",
+      "files": []
+    },
+    {
+      "id": 33,
+      "prompt": "一只燕子完全展开双翼，翼展是唯一主体，自动选择横竖版并确保翼尖完整。",
+      "expected_output": "Selects landscape when it materially improves complete wingspan fit and effective bird scale while retaining breathing room around both wingtips. It keeps the full source-supported envelope inside the ivory canvas and does not choose portrait merely because photo-watercolor-editorial historically favored vertical posters.",
+      "files": []
+    },
+    {
+      "id": 34,
+      "prompt": "两只燕子一高一低分布在左上到右下的对角线上，下面一只展开翅膀；自动决定海报方向。",
+      "expected_output": "Evaluates the whole protected relational envelope rather than the lower bird alone. Portrait may win when it preserves the high-low diagonal relation, complete wing and tail tips, strong subject scale, active ivory space, and title placement. Landscape wins only if its total score leads by at least 2. A close score defaults to portrait, and orientation never changes source-locked geometry.",
+      "files": []
+    },
+    {
+      "id": 35,
+      "prompt": "原照片是横拍，但主体是一座细长的塔，周围环境不重要。调用 photo-watercolor-editorial 自动选择方向。",
+      "expected_output": "Selects portrait when the tall complete tower envelope, effective scale, and vertical negative-space rhythm fit better there. It does not copy the source landscape aspect ratio, and it crops only incidental surroundings without inventing architecture.",
+      "files": []
+    },
+    {
+      "id": 36,
+      "prompt": "主体在横版和竖版里都能完整呈现，两种方向的关系、尺度和标题空间差不多。自动选择即可。",
+      "expected_output": "Scores both viable directions and selects portrait because the difference is below 2, preserving photo-watercolor-editorial's editorial-poster default. It records the tie internally and sends only portrait near 3:5 plus a concise fit reason to the image generator.",
+      "files": []
+    },
+    {
+      "id": 37,
+      "prompt": "保留一张横向全景原片并加入 photo-watercolor-editorial 水彩区域，自动选择最终画布方向。",
+      "expected_output": "In include-original, compares both layouts while preserving the embedded panorama's aspect ratio and avoiding aggressive crop. It often selects landscape when that creates a useful watercolor-and-title field without reducing the photo excessively, but source orientation is evidence rather than an automatic verdict. Completeness applies only outside the embedded photo.",
+      "files": []
+    },
+    {
+      "id": 38,
+      "prompt": "明确使用横版处理这张纵向主体照片。",
+      "expected_output": "Keeps orientation_mode auto because no numeric W:H ratio was supplied. It favors the matching 5:3 standard candidate only when the complete primary envelope, hard semantic locks, and viable title space still pass. The direction word never creates a third orientation mode or an inferred custom ratio.",
+      "files": []
+    },
+    {
+      "id": 39,
+      "prompt": "人物横向伸出一条手臂，浅色皮肤内部水彩变化自然，但不要让手臂边缘出现断断续续的颗粒勾线。用 photo-watercolor-editorial 做横版海报。",
+      "expected_output": "Keeps orientation_mode auto and favors its 5:3 candidate because the user supplied only a direction word, not a numeric ratio. It preserves the complete arm gesture and draws its decisive outer boundary with one or a few long continuous pressure-varying strokes. Any lost edge is one broad intentional passage rather than many short gaps. Natural broad wash variation may remain inside the arm, but granular buildup, flickering contour fragments, and repeated edge specks are rejected.",
+      "files": []
+    },
+    {
+      "id": 40,
+      "prompt": "雪山照片里岩石和积雪纹理很细碎。用 photo-watercolor-editorial 概括山体，保留山势，但不要满山黑白斑点。",
+      "expected_output": "Treats each dominant mountain as a structure-bearing compositional mass. It groups the mountain into two to four connected light, middle, and dark planes with a few long slope-aligned value boundaries. Individual snow patches and rock flecks merge into those planes outside one focal zone. A few focal accents may clarify a ridge, but scattered similarly sized black-and-white spots may not construct the mountain. Broad connected sky blooms and neutral paper tooth remain acceptable.",
+      "files": []
+    },
+    {
+      "id": 41,
+      "prompt": "人物穿有格纹和褶皱的衣服，头发浓密卷曲。生成简约水彩海报，重点保留姿态，不要衣服和头发都变成碎色斑。",
+      "expected_output": "First groups the garment and hair into two to four connected value families. Checks, folds, curls, highlights, and shadows are merged into a few larger directional rhythms outside one source-supported focal zone. The focus receives only sparse recognition-bearing accents. Hair remains one connected mass with one or two broad turns; clothing remains a coherent garment plane. Neither is built from repeated small tiles, isolated dark-light flecks, or equally distributed detail.",
+      "files": []
+    },
+    {
+      "id": 42,
+      "prompt": "用一张脸部清晰的正面人物照片生成 photo-watercolor-editorial 海报，没有指定是否无五官。",
+      "expected_output": "Defaults to faceless false and selects human-painted-face. It preserves the source-supported frontal head envelope, asymmetry, visible eye placement, brow direction, nose axis, mouth position, hairline, and jaw-neck relation. The face is built from two to four connected value masses with one restrained facial focal zone and only a few clean landmark shapes. It does not output a blank face, photographic pores, scattered skin spots, invented expression, or perfect symmetry.",
+      "files": []
+    },
+    {
+      "id": 43,
+      "prompt": "调用 photo-watercolor-editorial，faceless: true。人物保持无五官，但姿态、头部朝向和发型要保留。",
+      "expected_output": "Selects human-faceless only because the switch is explicitly true. It uses a clean complete faceless plane with no eyes, nose, mouth, pseudo-features, isolated marks, or deletion holes while preserving head direction, hair, shoulder-neck relation, posture, gesture, and relationship geometry. It does not apply the faceless instruction to any animal in the scene.",
+      "files": []
+    },
+    {
+      "id": 44,
+      "prompt": "人物脸部因为运动模糊只能看清头部转向、发际线和脸部大明暗，faceless 保持默认。",
+      "expected_output": "Uses faceless false and selects human-structure-face rather than guessing crisp landmarks or switching to the aesthetic faceless branch. It preserves the supported head turn, hairline, jaw-neck relation, and two to four broad connected facial value families. It omits uncertain eye, nose, and mouth edges wholesale, with no pseudo-eyes, partial lips, floating nose shadow, invented identity, expression, symmetry, or viewpoint.",
+      "files": []
+    },
+    {
+      "id": 45,
+      "prompt": "照片里人物抱着一只面部清晰的猫。人物默认画脸，猫也要保留可靠表情，使用 source-locked。",
+      "expected_output": "Uses faceless false for the person and independently selects animal-simplified-face for the cat. It preserves the person's source-supported simplified facial landmarks and the cat's eye placement, gaze, muzzle relation, and facial color divisions as separate concise branches. Neither face treatment changes the embrace, contact points, relative centers, scale, axes, or occlusion, and the human switch never blanks the animal face.",
+      "files": []
+    },
+    {
+      "id": 46,
+      "prompt": "保留一张人物原照片，同时在外部生成 photo-watercolor-editorial 水彩人物；faceless: true。",
+      "expected_output": "Uses include-original and faceless true only for generated watercolor interpretation. The embedded source-photo face remains pixel-faithful and is not blanked, repainted, blurred, or otherwise altered. The generated person uses the clean faceless branch while preserving source-supported pose, head direction, and relational geometry.",
+      "files": []
+    },
+    {
+      "id": 47,
+      "prompt": "一位脸部清晰、戴猫耳头饰的人趴在床面上，双臂横向伸展。房间里还能看见窗帘、床栏、床头桌和瓶子。用 auto 做 poster-only photo-watercolor-editorial 海报，保留现在的人脸画法。",
+      "expected_output": "Locks the person, cat-ear headpiece, head turn, reclining posture, extended-arm gesture, and current human-painted-face behavior. Keep only one broad pale contact plane beneath the arms. Remove the room first; restore at most one pale-blue atmospheric wash or up to three broken structural strokes only if they keep the source-specific viewing or layering character without becoming curtains, a full bed rail, furniture, bottle, grid, or reconstructed bedroom. Choose orientation from the complete person-and-arm envelope.",
+      "files": []
+    },
+    {
+      "id": 48,
+      "prompt": "一位脸部清晰的卷发人物穿浅色格纹外套、托腮坐在花地前。花和天空只提供柔和气氛，不是主体。使用 auto 生成 photo-watercolor-editorial 海报。",
+      "expected_output": "Locks the person, source-supported painted face, curls, hand-to-cheek gesture, posture, and broad garment color structure. Select the flowers as one relational-support family because their recognizable category and surrounding placement explain the source setting: retain several readable violet flower heads and slender stems at uneven heights around the figure, but compress exact count, dense repetition, interior detail, placement, and meadow depth. A pale-blue atmospheric wash may remain only for a distinct sky or light function. Flowers stay lower contrast and less detailed than the person but must not collapse into anonymous color marks.",
+      "files": []
+    },
+    {
+      "id": 49,
+      "prompt": "人物在客厅里抱着一只面部清晰的猫，使用 source-locked；人物和猫的脸都按当前新版方式处理，但不要保留房间陈设。",
+      "expected_output": "Locks the person and cat as one relational group because the embrace carries the event. Source-locked preserves relative centers, scale, axes, contact, occlusion, the painted human face, and animal landmarks without locking the room. A minimal seat or arm support survives only if required for grounding. Other context is removed; a single compressed trace may return only if its absence makes the composition generic and it no longer reads as furniture or room perspective.",
+      "files": []
+    },
+    {
+      "id": 50,
+      "prompt": "人物完整坐在一把结构复杂的椅子上，我要求主体完整，但椅子只是承托，背景还有很多装饰。生成 poster-only photo-watercolor-editorial 海报。",
+      "expected_output": "Applies Subject Completeness only to the locked person, not to the whole photograph or complete chair. Keep the chair only as one or two broad subordinate support planes required for seat contact and grounding, without ornament, legs, joints, or full construction. Remove decorative surroundings first and restore only a compressed non-object trace if its absence makes the source composition generic. Preserve the current painted face, complete body envelope, seated posture, and contact.",
+      "files": []
+    },
+    {
+      "id": 51,
+      "prompt": "一只面部和羽色特征可辨的鸟停在窗外树枝上，照片隔着带有数条横向窗棱的玻璃拍摄，周围枝叶和室内反光很多。用 auto 做 poster-only photo-watercolor-editorial 海报。",
+      "expected_output": "Locks the bird species cues, visible eye and gaze, beak structure, body axis, tail, feet, and perch relation before reducing context. Select foliage as one relational-support family: retain several recognizable broad leaf shapes and a few connecting stem directions around and behind the bird while compressing exact count, dense repetition, interior texture, branch network, and scenic depth. Remove reflections and literal window construction, then restore the window boundary only as one structural trace of no more than three broken horizontal charcoal strokes. Leaves remain quieter than the bird but must still read as leaves; preserve the animal face branch and choose orientation from the bird-and-perch envelope, not the window bars.",
+      "files": []
+    },
+    {
+      "id": 52,
+      "prompt": "人物是主体，周围花叶和一片淡色洗只作为抽象陪衬。生成 photo-watercolor-editorial 海报，不要让陪衬铺满画面。",
+      "expected_output": "Keeps the person as the protected primary while compressing the subordinate flowers, foliage, atmospheric wash, and residual traces. It creates atmosphere through negative space, distance, pauses, asymmetry, scale contrast, and limited marks rather than decorative scene filling. It applies no percentage quota to either the abstract support motif or total negative space.",
+      "files": []
+    },
+    {
+      "id": 53,
+      "prompt": "根据照片内容为水彩海报生成英文标题。照片里是一只鸟安静地停在枝头，标题不要空泛，也不要默认黑色。",
+      "expected_output": "Creates one natural, understated, source-grounded English title of two to five words and avoids empty Memory, Dream, or Moment defaults. It records one dark source-derived color, 6%-7% short-edge type size, a title bounding-box target near 1% of canvas area, 35% width and 12% height caps, and 10%-12% aligned inset. In artifact-full the title stays out of the ImageGen prompt and the finalizer renders it once with the bundled serif; in portable-direct ImageGen receives and renders it once. Neither branch adds a subtitle or extra text.",
+      "files": []
+    },
+    {
+      "id": 54,
+      "prompt": "这个任务里刚刚已经生成过一张水彩海报。现在用同一张原照片再生成一个版本，其他要求不变。",
+      "expected_output": "Classifies the current generation context as used and does not create another image in the same task. It asks for a fresh task or an independent stateless Image API request, preserves the original source and approved semantic locks, and never feeds the previous generated output back as a reference.",
+      "files": []
+    },
+    {
+      "id": 55,
+      "prompt": "第一次在这个任务中用一张背景干净的单人照片生成 photo-watercolor-editorial 海报，没有指定风格参考图。",
+      "expected_output": "Uses the public edition's text-only rendering policy because the compact watercolor language is sufficient. It records the upload's evidence role internally but tells ImageGen only to repaint the upload entirely as watercolor. It generates one image and does not attach a bundled or external style image.",
+      "files": []
+    },
+    {
+      "id": 56,
+      "prompt": "照片隔着玻璃拍摄，带反光、几条重复窗格和大面积雾气。使用公开版的纯文本渲染策略生成水彩海报。",
+      "expected_output": "Builds a region-by-mechanism map rather than naming glass, grid, or fog categories: periodic-repetition is active in support and transparent-overlap is active in atmosphere. It emits each plain visual outcome once, reducing regular structure to a sparse softened interrupted rhythm and unifying translucent layers into broad overlaps or a controlled wash. It keeps rendering guidance text-only and attaches no style-reference image.",
+      "files": []
+    },
+    {
+      "id": 57,
+      "prompt": "一只毛发很密的黑狗站在杂草和茂密树叶前，只生成简约水彩海报。",
+      "expected_output": "Maps both dog and vegetation by visual mechanism instead of object class. The primary activates micro-repetition, contour-fragmentation, and value-fragmentation; support activates micro-repetition and contour-fragmentation. The same canonical outcomes merge repeated units into connected shapes, absorb minor edge turns, and merge broken tone. It keeps the rendering instruction text-only and avoids wording that would amplify the active mechanisms.",
+      "files": []
+    },
+    {
+      "id": 58,
+      "prompt": "把岩石、积雪和沙地纹理都很细碎的旅行照片做成 photo-watercolor-editorial，不要出现棋盘格或满画面颗粒。",
+      "expected_output": "Does not create a terrain-material category. It maps visible small repetition, broken contours, and tonal patching to micro-repetition, contour-fragmentation, and value-fragmentation. The prompt emits the same connected-shape, continuous-boundary, and broad-value outcomes used for any subject, then ends the medium block with positive matte, tactile, calm-interior, visible-paper language rather than an Avoid or Exclude inventory.",
+      "files": []
+    },
+    {
+      "id": 59,
+      "prompt": "刚生成的海报出现棋盘格、数字涟漪和块状覆盖。把这张结果传回去清理一下，其他都不要变。",
+      "expected_output": "Marks the attempt noncompliant, names the largest failed region and observed mechanism such as periodic repetition or value fragmentation, and refuses same-task image-to-image cleanup. It never reuses the failed output and requires an authorized fresh task or independent stateless call from the original source, changing at most one diagnosed variable.",
+      "files": []
+    },
+    {
+      "id": 60,
+      "prompt": "边牧主体周围那片淡蓝背景洗染很有水彩感，但耳缘和脸颊毛束过碎。下一次不要把背景洗染一起删掉。",
+      "expected_output": "Separates background_watercolor from primary_surface_coherence. It preserves one broad translucent source-derived background wash outside the primary while mapping the subject's fragmented edge, repeated units, and broken tones to the universal mechanism outcomes. A successful atmospheric wash neither excuses primary fragmentation nor gets deleted during its correction.",
+      "files": []
+    },
+    {
+      "id": 61,
+      "prompt": "严格比较两份纯文本渲染说明。云的标题、构图、色板和背景洗染都要完全一致，只允许水彩媒介措辞不同。",
+      "expected_output": "Compiles and freezes one complete core prompt before either attempt, then duplicates it into two fresh diagnostic tasks. Both tasks remain text-only and attach no style image; the second changes only the minimum watercolor-medium wording. Title, composition, subject lock, atmospheric trace, palette, exclusions, and all other rendering language remain byte-for-byte equivalent, and both final prompts are retained for drift audit.",
+      "files": []
+    },
+    {
+      "id": 62,
+      "prompt": "云的水彩版本背景大色洗很好，但云体内部仍像花椰菜和泡沫颗粒。如何判定这张图？",
+      "expected_output": "Credits the broad subordinate background wash on the background_watercolor axis when it is translucent, non-object-like, source-derived, and leaves clean ivory space. It independently marks primary_surface_coherence noncompliant because the cloud interior is built from repeated cauliflower or foam-like microstructure rather than a few connected washes. It does not collapse the two findings into one verdict or remove the background benefit.",
+      "files": []
+    },
+    {
+      "id": 63,
+      "prompt": "云和长毛边牧的测试都有漂亮背景，但主体表面没有改善。以后纯文本渲染说明应如何调整？",
+      "expected_output": "Preserves the successful broad source-derived background wash in text and adjusts wording by active mechanisms, not by cloud or animal categories. Because the protected primary has micro-repetition, contour-fragmentation, value-fragmentation, or transparent-overlap, it strengthens connected washes and surface coherence without attaching a style-reference image or changing subject evidence.",
+      "files": []
+    },
+    {
+      "id": 64,
+      "prompt": "按刚才表现更好的纯文本 A 方案处理一朵粉蓝色云。背景要保留宽阔水彩洗染，但云体不要逐瓣描成花椰菜。",
+      "expected_output": "Uses text-only and preserves one broad translucent pink-blue background wash outside the primary. It maps repeated lobes, edge breakup, and internal tonal patching to the same micro-repetition, contour-fragmentation, and value-fragmentation outcomes used elsewhere. The cloud reads through one connected envelope and connected tonal masses before any focal accent.",
+      "files": []
+    },
+    {
+      "id": 65,
+      "prompt": "按纯文本 A 方案画这只长毛边牧。眼神和黑白脸谱要可靠，背景蓝灰洗染可以活，但不要让耳缘和脸颊全是一圈尖毛束。",
+      "expected_output": "Uses text-only and keeps a broad lively blue-gray atmospheric wash outside the primary. It selects animal-simplified-face independently, then applies micro-repetition, contour-fragmentation, and value-fragmentation to the subject. Recognition survives through the connected envelope, connected black-white masses, supported gaze, head axis, and facial division without an object-specific surface branch.",
+      "files": []
+    },
+    {
+      "id": 66,
+      "prompt": "缩略图里主体要先读成整体，放大后才看见少量水彩变化。请把这条应用到有羽毛、雪斑和碎岩纹理的照片。",
+      "expected_output": "Treats feathers, snow patches, and rock chips only as examples of the same mechanisms. It writes one region map with micro-repetition, contour-fragmentation, and value-fragmentation, emits each universal canonical outcome once, and requires recognition to survive from a connected envelope and connected value masses when local granulation is mentally removed.",
+      "files": []
+    },
+    {
+      "id": 67,
+      "prompt": "为一只长毛边牧编译最终 ImageGen 提示词。内部分析可以完整，但最终提示词必须简洁，眼神和黑白脸谱要保留。",
+      "expected_output": "Keeps full analysis and mode labels in the structured contract. It emits exactly four plain-language blocks without padding, keeps every heading on its own line with blank separators, includes the normalized ratio exactly once, never exceeds 320 words, and passes scripts/check_prompt.py before sending the saved UTF-8 text verbatim to ImageGen.",
+      "files": []
+    },
+    {
+      "id": 68,
+      "prompt": "边牧的牙齿、胡须、鼻孔和细毛都不要画得太具体。请把这些要求写进最终水彩提示词。",
+      "expected_output": "Does not copy the requested micro-detail inventory into the prompt. It selects animal-simplified-face independently, maps repeated marks and fragmented boundaries to universal mechanisms, and emits the positive focal result as connected facial shapes. If open_mouth is true, it uses the canonical uninterrupted focal plane and broad dark mouth outcome.",
+      "files": []
+    },
+    {
+      "id": 69,
+      "prompt": "这张照片可靠细节很多，请全部写入提示词，超过四百词也没关系。",
+      "expected_output": "Retains reliable evidence internally but compiles only contracted outcomes. It keeps modes, exact ratio, completeness, universal form, every selected mechanism, focal interface, watercolor medium, all title ratios, and output guardrails. It removes optional atmosphere or adjectives before any invariant and refuses an over-320-word prompt.",
+      "files": []
+    },
+    {
+      "id": 70,
+      "prompt": "四区块提示词已经写好，但第三块有一长串四十多个英文单词的负面词。现在直接生成。",
+      "expected_output": "Does not generate. It saves the exact prompt and prompt-contract JSON, runs scripts/check_prompt.py --contract, and treats the exclusion sentence over 25 words as a blocked gate. It repairs the compiled prompt without deleting contracted invariants or pasting internal analysis.",
+      "files": []
+    },
+    {
+      "id": 71,
+      "prompt": "卷发人物、长毛动物和碎雪山表面都很复杂。是不是应该分别给 curly-hair、fur 和 snow 新增三个分类器？",
+      "expected_output": "Rejects all three object or material labels as classifier states. It maps each region to the existing visual mechanisms, allowing multiple mechanisms at once, and emits the same connected-shape, continuous-boundary, connected-value, limited-repeat, or broad-overlap outcomes. It does not add a new classifier label, word blacklist, or object-specific checker branch.",
+      "files": []
+    },
+    {
+      "id": 72,
+      "prompt": "边牧张嘴仰头，保留表情但不要让牙齿、胡须和鼻孔变成精细焦点。",
+      "expected_output": "Selects animal-simplified-face independently from regional complexity and records open_mouth true in the contract. The prompt uses the qualitative positive sentence 'Use a calm uninterrupted face plane and a broad dark mouth shape with a restrained warm note.' It does not ask the model to self-audit accent counts or enumerate forbidden facial parts.",
+      "files": []
+    },
+    {
+      "id": 73,
+      "prompt": "把这张照片做成 4:5 的水彩海报，不要自动改成 3:5。",
+      "expected_output": "Switches from the default auto mode to orientation_mode user-ratio because the user supplied numeric 4:5. It normalizes and records aspect_ratio 4:5 as an output invariant, includes exactly 'Use a 4:5 canvas.' in block one, requests the native ratio when the backend exposes it, and verifies the generated pixel ratio afterward. Relative pixel-ratio error up to 1% passes; larger error fails without substituting, cropping, stretching, padding, or regenerating.",
+      "files": []
+    },
+    {
+      "id": 74,
+      "prompt": "这张随手拍主体可靠，但取景、主体大小、明暗层级、背景杂乱和留白都很差。不要照着原图做，重构成真正好看的 poster。",
+      "expected_output": "Keeps the default orientation_mode auto because no numeric ratio was supplied, then selects design_mode poster-rebuild without waiting for the user to prescribe each repair. It rebuilds framing, subject-group scale and placement, negative space, tonal hierarchy, support layout, and title relation from reliable evidence while preserving category, count, viewpoint, pose, relationship, event, and complete terminals. It does not reconstruct the source scene.",
+      "files": []
+    },
+    {
+      "id": 75,
+      "prompt": "照片质量很差，但两个人的高低位置和握手关系很重要。请大幅重构成 16:9 海报。",
+      "expected_output": "Switches to orientation_mode user-ratio for the explicit numeric 16:9 request and combines source-locked composition with poster-rebuild design rather than treating them as mutually exclusive. It preserves the relational group as one geometric unit while rebuilding its overall scale and placement, negative space, tonal hierarchy, and support field on an exact 16:9 canvas. It does not independently move either person or invent a new interaction.",
+      "files": []
+    },
+    {
+      "id": 76,
+      "prompt": "这是一种以前从未见过的外星矿物，表面有大量细小重复孔洞、碎裂明暗和锯齿轮廓。不要等我告诉你怎么处理。",
+      "expected_output": "Does not add an alien-mineral category. It maps the unknown subject to micro-repetition, value-fragmentation, and contour-fragmentation, preserves the reliable category-level envelope and evidence, emits the same canonical outcomes used for known subjects, and passes the unified contract checker.",
+      "files": []
+    },
+    {
+      "id": 77,
+      "prompt": "提示词为了省字，只写标题 compact scale 和 generous inset，没有写具体比例。现在生成。",
+      "expected_output": "Does not generate. The checker requires the portable-direct title invariants: 6%-7% type size of the shortest edge, around 1% title bounding-box area, 35% width and 12% height caps, and 10%-12% inset from aligned canvas edges. Word pressure never removes them. In artifact-full the deterministic finalizer enforces a 0.6%-2% bounding-box range while ink coverage remains diagnostic.",
+      "files": []
+    },
+    {
+      "id": 78,
+      "prompt": "我要 7:4 横版，但当前生图界面可能没有这个原生比例。",
+      "expected_output": "Switches to orientation_mode user-ratio, records normalized aspect_ratio 7:4, and keeps it in the final prompt. If native ratio control is unavailable, it generates without pretending the backend was fixed, then verifies output pixels. Relative error up to 1% passes; larger error is reported as noncompliant without substituting 5:3, cropping, stretching, padding, or regenerating.",
+      "files": []
+    },
+    {
+      "id": 79,
+      "prompt": "原照片本身构图、留白和明暗已经很好，只需要做成水彩海报。",
+      "expected_output": "Keeps the default orientation_mode auto because no numeric ratio was supplied, selects standard-editorial rather than poster-rebuild, preserves the workable design, and still applies the same evidence, complexity, focal, medium, title, and aspect-ratio contract. Poster-rebuild is a diagnosed design intervention, not an automatic style synonym.",
+      "files": []
+    },
+    {
+      "id": 80,
+      "prompt": "这张复杂照片同时有人物卷发、碎石积雪、玻璃反射、窗格和雾气，输出 1:1，并把差构图大幅重构。",
+      "expected_output": "Switches to orientation_mode user-ratio for the explicit numeric 1:1 request and uses one prompt contract with poster-rebuild, the selected face branch, and multiple mechanisms distributed across primary, focal, support, and atmosphere. It emits each canonical mechanism outcome only once, retains all title ratios, stays within 320 words by trimming optional nuance, and never creates object-specific classifiers.",
+      "files": []
+    },
+    {
+      "id": 81,
+      "prompt": "当前环境能生成图片、能读取生成文件，也能加载本地依赖和运行 Python。用 photo-watercolor-editorial 做海报。",
+      "expected_output": "Selects execution_profile artifact-full before prompt compilation and keeps it stable. ImageGen receives one finished-artwork prompt with no actual title and no title-focused fourth-block heading. Block one describes only calm, empty open paper with an even light value and never explains its later use; OUTPUT CONTROL keeps the area visually unmarked. After the single image call, the skill runs the deterministic finalizer from the immutable base into a new PNG.",
+      "files": []
+    },
+    {
+      "id": 82,
+      "prompt": "这个环境只有图片生成能力，没有本地 Python 或可读的输出路径。生成完整的 photo-watercolor-editorial 海报。",
+      "expected_output": "Selects execution_profile portable-direct without probing unavailable dependencies. It compiles the exact title, contracted corner, color, 6%-7% short-edge type size, approximately 1% title bounding-box target, width and height caps, inset, and no-extra-text rule into TITLE AND OUTPUT, then asks ImageGen once for the complete poster. It does not invoke the local finalizer or claim deterministic typography.",
+      "files": []
+    },
+    {
+      "id": 83,
+      "prompt": "当前环境没有任何图片生成能力，但请运行 photo-watercolor-editorial。",
+      "expected_output": "Stops concisely because the skill requires a finished image. It does not substitute a prompt-only artifact, attempt local typography, or pretend that portable-direct is available.",
+      "files": []
+    },
+    {
+      "id": 84,
+      "prompt": "两个人握手，高低位置、接触和中间空隙承载事件。用自动变化系统生成海报。",
+      "expected_output": "Locks category, count, viewpoint, posture, contact, relative scale, order, and meaningful interval first. It selects source-locked, records source-locked-group-integrity, and applies one internal recipe only to whole-group placement, whole-group scale, negative-space topology, wash, palette, edge, title relation, and other compatible axes. It never independently moves either person and does not ask the user to choose a recipe.",
+      "files": []
+    },
+    {
+      "id": 85,
+      "prompt": "照片隔着反光玻璃，窗格重复明显。变化系统选择 edge-bloom、局部深色块和水平辅助线。",
+      "expected_output": "Rejects that combination before generation. transparent-overlap conflicts with edge-bloom and localized-dark-counterweight, while periodic-repetition conflicts with horizontal-counterline. It selects another compatible axis value or recipe without weakening evidence and records the passed compatibility checks.",
+      "files": []
+    },
+    {
+      "id": 86,
+      "prompt": "artifact-full 的底图主体水彩效果不好，但文件尺寸和格式正常。自动再生成一张修复。",
+      "expected_output": "Records the base-art defect as non-blocking diagnostic evidence and refuses automatic resynthesis or image-to-image cleanup. Because the file is technically usable, it may still perform the contracted local title composition. A future image generation requires separate authorization and starts from the original source rather than this base.",
+      "files": []
+    },
+    {
+      "id": 87,
+      "prompt": "Python 第一次加字后标题越界，但无字底图正常。",
+      "expected_output": "Treats the layout failure as locally recoverable. It discards the attempted title output and runs one fallback composition from the same immutable untitled base using the distinct contracted fallback slot and a new output path. It never overlays the fallback onto the titled result, never repeats identical parameters, and never calls ImageGen again.",
+      "files": []
+    },
+    {
+      "id": 88,
+      "prompt": "为同一张照片自动生成三种不同构图让我选。",
+      "expected_output": "Selects exactly one evidence-compatible internal recipe and one complete axis set, compiles them once, and generates one image. It does not emit a grid, multiple variants, hidden retries, or recipe questionnaire. Another variation is a new explicitly authorized generative task.",
+      "files": []
+    },
+    {
+      "id": 89,
+      "prompt": "ImageGen 返回的 21:9 底图是 1912×823；不要裁切，也不要重画。继续 artifact-full。",
+      "expected_output": "Normalizes 21:9 to 7:3 and computes relative ratio error, which is about 0.43% for 1912×823 and therefore passes the 1% tolerance. It keeps the immutable dimensions, uses short-edge font sizing with an inclusive upper bound rounded down, and proceeds to one deterministic primary title composition without cropping, stretching, padding, or resynthesis.",
+      "files": []
+    },
+    {
+      "id": 90,
+      "prompt": "artifact-full 已经由 Python 加标题，为什么 ImageGen 提示词里还要突出 TITLE AND OUTPUT 和标题字段？",
+      "expected_output": "Separates geometry from output control. It records the actual title only in the external contract, describes the open area as calm empty paper with an even light value, and uses the neutral OUTPUT CONTROL heading. Its sole output sentence asks for one finished watercolor artwork with that area calm, empty, and visually unmarked; it never exposes the real title, the later Python step, or title-field language.",
+      "files": []
+    },
+    {
+      "id": 91,
+      "prompt": "最终提示词出现 COMPOSITIONWatercolor、OUTPUTSet 和 colors.Avoid 这种粘连。",
+      "expected_output": "Does not generate. The checker requires each canonical heading on its own line, one blank line before each body, and one blank line between blocks. It rejects glued headings or sentences, preserves the validated prompt as UTF-8 text, and sends those saved bytes verbatim instead of rebuilding them through concatenation.",
+      "files": []
+    },
+    {
+      "id": 92,
+      "prompt": "用户要求 21:9，提示词同时写了 Use a 7:3 canvas 和 This is exactly 21:9。",
+      "expected_output": "Normalizes the contract to 7:3, passes the ratio through a native API size or aspect-ratio parameter when one exists, and keeps exactly one prompt sentence: 'Use a 7:3 canvas.' The checker rejects a second equivalent ratio or explanatory restatement.",
+      "files": []
+    },
+    {
+      "id": 93,
+      "prompt": "最终 ImageGen 提示词里出现 editorial-recompose、poster-rebuild、contact-only 和 evidence-only。",
+      "expected_output": "Keeps those labels only in the external contract. It translates each into plain visible results such as improved subject placement, preserved viewpoint and relationships, rebuilt open space and tonal hierarchy, minimal contact support, and full watercolor repainting. The checker rejects internal workflow terms in the ImageGen prompt.",
+      "files": []
+    },
+    {
+      "id": 94,
+      "prompt": "提示词要求 exactly three colors、2–4 value masses、at most one warm accent。",
+      "expected_output": "Replaces self-audited counts with qualitative visual direction: a limited reference-derived palette, a few broad connected value masses, and a restrained warm note. The checker rejects the known exact-count phrases while the numeric budgets remain internal contract data.",
+      "files": []
+    },
+    {
+      "id": 95,
+      "prompt": "提示词堆了多条 Avoid、Exclude、Do not、Render no 列表。",
+      "expected_output": "Rewrites controllable qualities positively: matte tactile watercolor, calm interiors, visible paper grain, broad washes, selected subject and open paper. The checker rejects negative instruction inventories. Artifact-full uses one neutral unmarked-base sentence rather than enumerating text, letters, logos, signatures, and watermarks.",
+      "files": []
+    },
+    {
+      "id": 96,
+      "prompt": "artifact-full 的提示词写了 Reserve a quiet top-left title field。",
+      "expected_output": "Rejects title-field language. It instead says 'Keep the top-left calm and empty, with open paper and an even light value,' relates that empty area to the subject in plain spatial language, and leaves both the actual title and the later Python step outside the ImageGen prompt.",
+      "files": []
+    }
+  ]
+}

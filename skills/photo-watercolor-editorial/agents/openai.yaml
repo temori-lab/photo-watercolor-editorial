@@ -1,0 +1,4 @@
+interface:
+  display_name: "photo-watercolor-editorial"
+  short_description: "Evidence-locked variable watercolor posters"
+  default_prompt: "Use $photo-watercolor-editorial to turn this photo into one evidence-locked watercolor poster with an automatic compatible composition variation."
