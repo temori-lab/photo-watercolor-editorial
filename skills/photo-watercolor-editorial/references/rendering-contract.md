@@ -6,15 +6,15 @@ Use this layer for watercolor medium, paper, palette, edge behavior, and renderi
 
 - Use watercolor on cold-pressed paper, broad translucent washes, restrained wet-on-wet color bleeds, controlled pigment pooling, visible paper grain, and paper showing through as highlights and active negative space.
 - Use a limited palette drawn from the reference and keep clean color separation. Keep every painted form matte and tactile, with calm interiors and visible paper grain.
-- Make the protected primary read first from one connected outer silhouette and a few broad connected value masses separated by long directional boundaries.
+- Make core 1 read first from one connected outer silhouette or coherent field and a few broad connected value masses separated by long directional boundaries.
 - Select one focal zone. Permit only a few source-supported smaller marks there; keep every other interior broad, calm, and lower contrast.
 - Preserve decisive terminals and major profile turns. Let one broad lost-edge passage dissolve into paper only when it does not weaken evidence or geometry.
-- Keep indispensable support broader, quieter, and less complete than the primary. Render an atmospheric trace as one broad wash or sparse related rhythm, never as complete secondary objects.
-- Allow one source-derived subordinate background wash to show broad translucent blooms, pooling, and soft variation outside the protected primary. Its liveliness never determines the subject's mark scale.
+- Keep a present core 2 readable through simplified structural wash or paper reserve, with lower contrast and detail than core 1.
+- Translate eligible accents through transparent glaze, wet bloom, lost edge, paper reserve, or sparse rhythm. They may overlap or frame protected content only while remaining subordinate and preserving faces, relations, and decisive geometry.
 
 ## Mechanism translation
 
-Use the exact canonical sentence for every pressure selected anywhere in `prompt-contract.json`. These sentences are architectural interfaces between classifier, compiler, and checker; keep them concise and object-independent.
+Use the exact canonical sentence for every pressure selected in `core_1`, `core_2`, or `focal`. Accent pressures remain diagnostic because the selected accent expressions already govern their visible treatment. These sentences are architectural interfaces between classifier, compiler, and checker; keep them concise and object-independent.
 
 - `micro-repetition`: `Merge repeated details into broad connected shapes with a few recognition-bearing focal accents.`
 - `contour-fragmentation`: `Absorb minor edge turns into long continuous boundaries while preserving decisive endpoints.`
@@ -22,7 +22,7 @@ Use the exact canonical sentence for every pressure selected anywhere in `prompt
 - `periodic-repetition`: `Reduce regular repetition to a sparse, softened, interrupted rhythm.`
 - `transparent-overlap`: `Unify translucent layers into broad overlaps or a controlled wash.`
 
-Emit each selected mechanism sentence once, even when it occurs in several regions. Never name an object merely to activate a rendering rule.
+Emit each protected mechanism sentence once, even when it occurs in multiple protected regions. Never name an object merely to activate a rendering rule or preserve an omitted form.
 
 ## Focal translation
 
@@ -37,6 +37,6 @@ When `open_mouth` is true, add exactly this positive structure: `Use a calm unin
 
 ## One-pass validation
 
-At thumbnail size, verify that the primary survives without interior granulation. At 100%, verify the selected mechanisms rather than object examples. Reject or report when small units spread evenly; contours flicker through repeated protrusions or gaps; tone is built from patches or speckle; regular systems are reconstructed; transparent layers compete with the subject; every region has equal detail; atmosphere becomes complete objects; the paper field is fully stained; focal landmarks drift; or the result reads as a digital filter.
+At thumbnail size, verify that core 1 leads without interior granulation. At normal viewing size, verify that present core 2 remains legible and accents emerge only after both core layers. At 100%, verify the selected mechanisms rather than object examples. Reject or report when small units spread evenly; contours flicker through repeated protrusions or gaps; tone is built from patches or speckle; regular systems are reconstructed; transparent accents obscure a face or protected relation; every region has equal detail; core 2 disappears; accents become connected and dominant; omitted construction is rebuilt; the paper field is fully stained; focal landmarks drift; or the result reads as a digital filter.
 
 Generate once per independent attempt. A prompt that passes the deterministic checker may still fail this visual review.

@@ -1,8 +1,8 @@
 # photo-watercolor-editorial Four-Block Compiler
 
-Resolve execution profile, evidence, layout, face, complexity, variation, and title before writing. Keep rendering guidance text-only. Save one version-2 `prompt-contract.json`, then send ImageGen exactly four non-empty blocks in the order below. Put every heading on its own line, add one blank line before its body, and keep one blank line between blocks. The first three headings are shared. Use `OUTPUT CONTROL` as block four in `artifact-full`, or `TITLE AND OUTPUT` in `portable-direct`. Keep the complete brief at or below 320 English words. Emit only the selected execution-profile branch and pass the validated UTF-8 prompt bytes to ImageGen without rebuilding or concatenating them.
+Resolve runtime capability, execution profile, semantic reading, watercolor expression, evidence, layout, face, complexity, variation, title, font, color mode, and anchor before writing. Save one version-6 `prompt-contract.json` whose runtime block exactly matches `runtime-plan.json`, then send ImageGen exactly four non-empty blocks in the order below. Put every heading on its own line, add one blank line before its body, and keep one blank line between blocks. The first three headings are shared. Use `OUTPUT CONTROL` as block four in `artifact-full`, or `TITLE AND OUTPUT` in `portable-direct`. Keep the complete brief at or below 480 English words. Emit only the selected execution-profile branch and pass the validated UTF-8 prompt bytes to ImageGen without rebuilding or concatenating them.
 
-Keep this priority: evidence and relationship; complete geometry; connected form; selected mechanism outcomes; focal structure; selected variation; watercolor field; selected title-output branch. Remove optional nuance before any contracted outcome.
+Keep this priority: first-read core; optional explanatory second-read core; evidence and relationship; complete geometry; focal structure; selected watercolor expressions; eligible painterly accents; complexity outcomes; selected variation; watercolor field; selected title-output branch. Remove optional nuance before any contracted outcome.
 
 ## Contract
 
@@ -10,8 +10,42 @@ Write one UTF-8 JSON object outside the prompt:
 
 ```json
 {
-  "version": 2,
+  "version": 6,
   "execution_profile": "artifact-full",
+  "runtime": {
+    "resolver_version": 3,
+    "image_generation": true,
+    "generated_path_delivery": "post-call-local",
+    "workspace_dependencies": true,
+    "workspace_python_executable": "C:\\absolute\\path\\to\\workspace\\python.exe",
+    "workspace_python_verified": true,
+    "local_scripts": true,
+    "pillow": true,
+    "font": {
+      "requested_source": "bundled",
+      "requested_value": "editorial-serif",
+      "requested_style": null,
+      "resolved_source": "bundled",
+      "family": "Libre Baskerville",
+      "style": "Regular",
+      "path": "C:\\absolute\\path\\to\\LibreBaskerville-VariableFont_wght.ttf",
+      "face_index": 0,
+      "sha256": "05a95421961341c5b2556285e8415df9db27dab4f4abe22b446b3c6a8b916c5d",
+      "verified": true,
+      "fallback_used": false,
+      "warning": null
+    },
+    "environment": {
+      "python_version": "3.12.13",
+      "pillow_version": "12.3.0",
+      "freetype_version": "2.14.3",
+      "typography_engine_version": 1,
+      "finalizer_version": 3
+    },
+    "deterministic_typography_ready": true,
+    "resolved_profile": "artifact-full",
+    "typography_assurance": "deterministic"
+  },
   "semantic": {
     "photo_mode": "poster-only",
     "composition_mode": "editorial-recompose",
@@ -22,11 +56,23 @@ Write one UTF-8 JSON object outside the prompt:
     "cue_groups": 3,
     "focal_mode": "animal-simplified-face",
     "open_mouth": false,
-    "regions": {
-      "primary": ["micro-repetition"],
+    "reading": {
+      "mode": "entity-led",
+      "core_2_present": true,
+      "accent_count": 1,
+      "accent_functions": ["framing", "light"],
+      "omission_policy": "omit-noncontributing-construction"
+    },
+    "complexity_map": {
+      "core_1": ["micro-repetition"],
+      "core_2": ["contour-fragmentation"],
       "focal": [],
-      "support": [],
-      "atmosphere": []
+      "accents": ["periodic-repetition", "transparent-overlap"]
+    },
+    "watercolor_plan": {
+      "core_1": ["connected-form"],
+      "core_2": ["structural-wash"],
+      "accents": ["transparent-glaze", "sparse-rhythm"]
     }
   },
   "variation": {
@@ -38,8 +84,6 @@ Write one UTF-8 JSON object outside the prompt:
       "subject_scale": "balanced",
       "negative_space": "top-field",
       "title_slot": "top-left",
-      "support_mode": "relational-cluster",
-      "trace_mode": "none",
       "wash_mode": "directional-drift",
       "wash_polarity": "light-field",
       "palette_size": 3,
@@ -47,12 +91,12 @@ Write one UTF-8 JSON object outside the prompt:
       "focal_contrast": "moderate",
       "typography_relation": "quiet-corner"
     },
-    "compatibility_checks": []
+    "compatibility_checks": ["protected-title-clearance", "fragmented-edge-safe"]
   },
   "artifact": {
     "title_text": "Eyes Lifted",
     "title_color": "#273437",
-    "font_asset": "editorial-serif",
+    "title_color_mode": "auto-harmonized",
     "primary_title_slot": "top-left",
     "fallback_title_slot": "bottom-right",
     "maximum_compositions": 2
@@ -60,11 +104,11 @@ Write one UTF-8 JSON object outside the prompt:
 }
 ```
 
-Use only values defined by [Variation Engine](variation-engine.md). Record every active mechanism in every region. Keep the actual title in the contract for both profiles, but reveal it to ImageGen only in `portable-direct`.
+Run [Generation Runtime and Artifact Control](generation-runtime-contract.md) first. Load workspace dependencies, bind the returned Python executable, and run the resolver, checker, preflight, finalizer, and review checker only with that exact interpreter. Resolve the bundled face or the user's installed/file font before compiling. Copy the resolver's `runtime` object without reconstructing it, and require `execution_profile` to equal `runtime.resolved_profile`. Use only values defined by [Variation Engine](variation-engine.md). Record the semantic reading, complete complexity map, and watercolor plan independently. Keep the actual title and `title_color_mode` in the contract for both profiles, but reveal the title to ImageGen only in `portable-direct`.
 
 ## Block 1 — `SUBJECT AND COMPOSITION`
 
-Keep contract labels outside the prompt. Never emit `editorial-recompose`, `poster-rebuild`, `source-locked`, `standard-editorial`, `contact-only`, `relational-cluster`, `trace-led`, `evidence-only`, `zero source pixels`, or recipe names. Translate them into plain visual results.
+Keep contract labels outside the prompt. Never emit `editorial-recompose`, `poster-rebuild`, `source-locked`, `standard-editorial`, reading-mode names, `complexity_map`, `watercolor_plan`, role labels, pressure labels, expression labels, `evidence-only`, `zero source pixels`, or recipe names. Translate them into plain visual results.
 
 Use these exact plain-language interfaces:
 
@@ -75,23 +119,50 @@ Use these exact plain-language interfaces:
 
 Pass the selected ratio through a native API size or aspect-ratio parameter whenever the interface exposes one. In the prompt, state it once as `Use a [W:H] canvas.` Never repeat an equivalent ratio or add a second explanation.
 
+After evidence and completeness, compile the selected `reading.mode` interface exactly once:
+
+- `entity-led`: `Let the clearest reliable subject or relational group carry the first reading.`
+- `event-led`: `Let the visible action or interaction carry the first reading.`
+- `scene-led`: `Let the scene's main mass, route, interval, or directional structure carry the first reading.`
+- `abstract-led`: `Let source-supported color, light, mass, rhythm, and negative space carry the first reading.`
+
+Then always add:
+
+> Build the image around one clear first-read core and preserve its reliable category, event, or spatial organization.
+
+Add the selected second-read branch:
+
+- present: `Preserve one subordinate second-read relation, event carrier, or spatial structure that makes the source-specific reading complete.`
+- absent: `A separate second-read core is unnecessary; keep the first-read core complete and unambiguous.`
+
+Add the selected painterly-accent branch. When accents are present, retain only source-supported accents that add depth, framing, rhythm, light, color, or atmosphere, with their combined salience below the first-read core or below both core layers when core 2 is present. When accents are absent, state that no additional painterly accent is needed beyond the protected core layer or layers and open paper.
+
+Then add exactly:
+
+> Omit source construction that contributes neither to the protected reading nor to the selected watercolor behavior.
+
+Add the matching viewing-scale hierarchy: core 1 leads at thumbnail size; present core 2 remains legible at normal viewing size; accents emerge only after the protected core layer or layers. Do not name discarded structures by direction, count, spacing, interval, frame, or placement. Watercolor technique never restores ineligible content.
+
 Compile the selected variation using these visual results:
 
 - placement: subject in the upper third; subject in the lower third; off-center subject balanced by side paper; or subject balanced by a quieter diagonal wash or shape.
 - scale: subject filling much of the frame with a complete silhouette; clear scale with breathing room; or a relatively small subject in broad open paper.
 - negative space: most open paper above, beside, or below the subject; or two quiet open-paper fields around it.
-- support: retain the broad contact surface or line; keep a small quiet source-supported cluster; or use a subdued source-supported directional mark.
-- trace: emit nothing for `none`; otherwise add one faint broken horizontal, interrupted vertical, or oblique organizing mark.
-
-In `artifact-full`, express the contracted open area without mentioning its later use: `Keep the [slot] calm and empty, with open paper and an even light value.` Add the selected relation as an empty-area description. End exactly with `Show only the selected subject, essential support, and open paper.`
+In `artifact-full`, express the contracted open area without mentioning its later use: `Keep the [slot] calm and empty, with open paper and an even light value.` Add the selected relation as an empty-area description. End exactly with `Show only the protected reading, selected watercolor accents, and open paper.`
 
 ## Block 2 — `PRIMARY FORM`
 
-Always include:
+Compile every selected `watercolor_plan` expression exactly once:
 
-> Build one connected silhouette from a few broad value masses and long directional boundaries, with one clear focal area and calm interiors.
+- `connected-form`: `Build the first-read core as one connected silhouette or coherent field from a few broad value masses and long directional boundaries, with one clear focal area and calm interiors.`
+- `structural-wash`: `Carry a source-supported relation or spatial structure through a simplified connected wash with reduced detail and contrast.`
+- `transparent-glaze`: `Use diluted transparent pigment for source-supported overlap or reflection without obscuring protected structure.`
+- `wet-bloom`: `Translate soft-focus or atmospheric evidence into broad wet-on-wet blooms instead of literal repeated units.`
+- `lost-edge`: `Let selected peripheral boundaries dissolve into paper while keeping their visual role readable.`
+- `paper-reserve`: `Use open paper as active light and negative space inside the selected composition.`
+- `sparse-rhythm`: `Translate repeated source structure into a sparse interrupted rhythm with visible paper between marks.`
 
-Include each selected mechanism outcome exactly once:
+Include each mechanism outcome selected in `core_1`, `core_2`, or `focal` exactly once. Keep accent pressures internal because the selected accent expressions already control visibility and subordination.
 
 - `micro-repetition`: `Merge repeated details into broad connected shapes with a few recognition-bearing focal accents.`
 - `contour-fragmentation`: `Absorb minor edge turns into long continuous boundaries while preserving decisive endpoints.`
@@ -108,7 +179,7 @@ Include the selected focal-mode interface from [Visual Complexity Classifier](vi
 
 State watercolor on cold-pressed paper, broad translucent washes, restrained wet-on-wet color bleeds, controlled pigment pooling, paper showing through as highlights and active negative space, and clean color separation.
 
-Compile the selected wash and field as concrete watercolor behavior. Translate the internal palette budget qualitatively:
+Compile the selected wash and field as non-objective watercolor behavior. A wash may balance the eligible composition but must not encode a discarded frame, grid, branch network, street system, or other construction. Translate the internal palette budget qualitatively:
 
 - wash: a soft incomplete translucent wash; a broad wash drifting along the dominant direction; a restrained wet bloom entering from an outer edge; a low diffuse horizontal haze; or separated translucent blooms across open paper.
 - field: light and paper-led; a quiet midtone wash with generous visible paper; or a localized darker counterweight.
@@ -124,8 +195,8 @@ Use the heading `OUTPUT CONTROL`. Do not include the actual title text or repeat
 
 ### `portable-direct`
 
-Use the heading `TITLE AND OUTPUT`. Compile typography relation as `Align the title field to the dominant axis.`, `Set the title field as a counter-axis.`, or `Keep the title field in a quiet corner.` Set the exact contract title once in the contracted corner field, a restrained editorial serif, and the contracted dark source-derived color. Size it `6%-7%` of the shortest edge; target `1%` bounding-box area; cap width at `35%`, height at `12%`; use a `10%-12%` inset. Permit at most three source-neutral line breaks. Add exactly `Keep it as the sole typographic element; leave the remaining poster visually unmarked.` End with `Output only the finished poster.`
+Use the heading `TITLE AND OUTPUT`. Compile typography relation as `Align the title field to the dominant axis.`, `Set the title field as a counter-axis.`, or `Keep the title field in a quiet corner.` Set the exact contract title once in the contracted corner field. Name the resolved installed/file family when available; otherwise use a restrained editorial serif. Use the contracted dark source-derived fallback color. Target `6%-7%` title-block height on the longest edge; reduce type size and adapt line wrapping as needed to fit. Target `1%` bounding-box area; cap width at `35%`, height at `12%`; use a `10%-12%` inset. Add exactly `Keep it as the sole typographic element; leave the remaining poster visually unmarked.` End with `Output only the finished poster.` Treat every resulting title-layout metric as `unverified-best-effort`; prompt compliance is not pixel compliance.
 
 ## Generation gate
 
-Run `python scripts/check_prompt.py --prompt <final-prompt.txt> --contract <prompt-contract.json>`. Repair any failure before generation. A pass proves structural completeness only.
+Run `<workspace-python> scripts/check_prompt.py --prompt <final-prompt.txt> --contract <prompt-contract.json> --runtime <runtime-plan.json>`. Repair technical schema, routing, and compiler failures before generation. Do not treat source or aesthetic audit warnings as blockers. A pass proves structural and runtime-routing completeness only. It never proves final title geometry, field safety, or color harmony.

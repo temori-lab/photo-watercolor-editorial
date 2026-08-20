@@ -6,7 +6,12 @@ from __future__ import annotations
 import copy
 import importlib.util
 import json
+import subprocess
+import sys
+import tempfile
 from pathlib import Path
+
+from typography_engine import runtime_environment
 
 
 HERE = Path(__file__).resolve().parent
@@ -16,9 +21,39 @@ if SPEC is None or SPEC.loader is None:
 CHECKER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CHECKER)
 
+BASE_RUNTIME = {
+    "resolver_version": 3,
+    "image_generation": True,
+    "generated_path_delivery": "post-call-local",
+    "workspace_dependencies": True,
+    "workspace_python_executable": str(Path(sys.executable).resolve()),
+    "workspace_python_verified": True,
+    "local_scripts": True,
+    "pillow": True,
+    "font": {
+        "requested_source": "bundled",
+        "requested_value": "editorial-serif",
+        "requested_style": None,
+        "resolved_source": "bundled",
+        "family": "Libre Baskerville",
+        "style": "Regular",
+        "path": str((HERE.parent / "assets" / "fonts" / "LibreBaskerville-VariableFont_wght.ttf").resolve()),
+        "face_index": 0,
+        "sha256": "05a95421961341c5b2556285e8415df9db27dab4f4abe22b446b3c6a8b916c5d",
+        "verified": True,
+        "fallback_used": False,
+        "warning": None,
+    },
+    "environment": runtime_environment(),
+    "deterministic_typography_ready": True,
+    "resolved_profile": "artifact-full",
+    "typography_assurance": "deterministic",
+}
+
 BASE_CONTRACT = {
-    "version": 2,
+    "version": 6,
     "execution_profile": "artifact-full",
+    "runtime": copy.deepcopy(BASE_RUNTIME),
     "semantic": {
         "photo_mode": "poster-only",
         "composition_mode": "editorial-recompose",
@@ -29,11 +64,23 @@ BASE_CONTRACT = {
         "cue_groups": 3,
         "focal_mode": "animal-simplified-face",
         "open_mouth": True,
-        "regions": {
-            "primary": ["micro-repetition"],
+        "reading": {
+            "mode": "entity-led",
+            "core_2_present": True,
+            "accent_count": 1,
+            "accent_functions": ["framing", "light"],
+            "omission_policy": "omit-noncontributing-construction",
+        },
+        "complexity_map": {
+            "core_1": ["micro-repetition"],
+            "core_2": ["contour-fragmentation"],
             "focal": ["micro-repetition"],
-            "support": [],
-            "atmosphere": ["transparent-overlap"],
+            "accents": ["periodic-repetition", "transparent-overlap"],
+        },
+        "watercolor_plan": {
+            "core_1": ["connected-form"],
+            "core_2": ["structural-wash"],
+            "accents": ["transparent-glaze", "sparse-rhythm"],
         },
     },
     "variation": {
@@ -45,8 +92,6 @@ BASE_CONTRACT = {
             "subject_scale": "balanced",
             "negative_space": "top-field",
             "title_slot": "top-left",
-            "support_mode": "relational-cluster",
-            "trace_mode": "none",
             "wash_mode": "directional-drift",
             "wash_polarity": "light-field",
             "palette_size": 3,
@@ -56,15 +101,13 @@ BASE_CONTRACT = {
         },
         "compatibility_checks": [
             "protected-title-clearance",
-            "trace-support-consistency",
-            "transparent-overlap-safe",
             "fragmented-edge-safe",
         ],
     },
     "artifact": {
         "title_text": "Eyes Lifted",
         "title_color": "#273437",
-        "font_asset": "editorial-serif",
+        "title_color_mode": "auto-harmonized",
         "primary_title_slot": "top-left",
         "fallback_title_slot": "bottom-right",
         "maximum_compositions": 2,
@@ -73,11 +116,11 @@ BASE_CONTRACT = {
 
 COMMON_BLOCKS = """SUBJECT AND COMPOSITION
 
-Repaint the upload entirely as watercolor. Use a 4:5 canvas. Improve subject placement and scale while preserving count, viewpoint, posture, relationships, and event. Rebuild framing, open space, tonal hierarchy, and minimal support. Keep the full visible subject silhouette and supported endpoints inside the frame. Place the subject in the lower third of the frame. Give the subject clear scale and ample breathing room. Keep most open paper above it. Keep a small quiet cluster of source-supported elements around the subject. Keep the top-left calm and empty, with open paper and an even light value. Separate this empty area clearly from the subject. Show only the selected subject, essential support, and open paper.
+Repaint the upload entirely as watercolor. Use a 4:5 canvas. Improve subject placement and scale while preserving count, viewpoint, posture, relationships, and event. Rebuild framing, open space, tonal hierarchy, and minimal support. Keep the full visible subject silhouette and supported endpoints inside the frame. Let the clearest reliable subject or relational group carry the first reading. Build the image around one clear first-read core and preserve its reliable category, event, or spatial organization. Preserve one subordinate second-read relation, event carrier, or spatial structure that makes the source-specific reading complete. Retain source-supported painterly accents only when they add depth, framing, rhythm, light, color, or atmosphere, and keep their combined salience below both core layers. Omit source construction that contributes neither to the protected reading nor to the selected watercolor behavior. At thumbnail size the first-read core must lead; the second-read core must remain legible at normal viewing size, and painterly accents may emerge only after both. Place the subject in the lower third of the frame. Give the subject clear scale and ample breathing room. Keep most open paper above it. Keep the top-left calm and empty, with open paper and an even light value. Separate this empty area clearly from the subject. Show only the protected reading, selected watercolor accents, and open paper.
 
 PRIMARY FORM
 
-Build one connected silhouette from a few broad value masses and long directional boundaries, with one clear focal area and calm interiors. Merge repeated details into broad connected shapes with a few recognition-bearing focal accents. Unify translucent layers into broad overlaps or a controlled wash. Preserve the supported gaze, head axis, and major facial color division as a few clean connected shapes. Use a calm uninterrupted face plane and a broad dark mouth shape with a restrained warm note. Use crisp focal edges with a dissolved periphery. Use moderate local focal contrast.
+Build the first-read core as one connected silhouette or coherent field from a few broad value masses and long directional boundaries, with one clear focal area and calm interiors. Carry a source-supported relation or spatial structure through a simplified connected wash with reduced detail and contrast. Use diluted transparent pigment for source-supported overlap or reflection without obscuring protected structure. Translate repeated source structure into a sparse interrupted rhythm with visible paper between marks. Merge repeated details into broad connected shapes with a few recognition-bearing focal accents. Absorb minor edge turns into long continuous boundaries while preserving decisive endpoints. Preserve the supported gaze, head axis, and major facial color division as a few clean connected shapes. Use a calm uninterrupted face plane and a broad dark mouth shape with a restrained warm note. Use crisp focal edges with a dissolved periphery. Use moderate local focal contrast.
 
 MEDIUM AND FIELD
 
@@ -92,17 +135,38 @@ Output one finished watercolor artwork with this open-paper area remaining calm,
 
 PORTABLE_TITLE_BLOCK = """TITLE AND OUTPUT
 
-Keep the title field in a quiet corner. Set “Eyes Lifted” top-left in a restrained editorial serif, #273437. Size it 6%-7% of shortest edge; target 1% bounding-box area; cap width 35%, height 12%; use 10%-12% inset. Keep it as the sole typographic element; leave the remaining poster visually unmarked. Output only the finished poster.
+Keep the title field in a quiet corner. “Eyes Lifted”, top-left, restrained editorial serif, #273437. Target 6%-7% title-block height on longest edge; reduce type size as needed to fit. 1% bounding-box area; cap width 35%, height 12%; use 10%-12% inset. Keep it as the sole typographic element; leave the remaining poster visually unmarked. Output only the finished poster.
 """
 
 
-def checked(prompt: str, contract: dict[str, object]) -> dict[str, object]:
-    normalized, schema_errors = CHECKER.validate_contract(contract)
+def checked(
+    prompt: str,
+    contract: dict[str, object],
+    resolved_runtime: dict[str, object] | None = None,
+) -> dict[str, object]:
+    runtime = resolved_runtime if resolved_runtime is not None else contract.get("runtime")
+    normalized, schema_errors = CHECKER.validate_contract(contract, runtime)
     result = CHECKER.check(prompt, normalized)
     if schema_errors:
         result["errors"] = schema_errors + list(result["errors"])
         result["ok"] = False
     return result
+
+
+def no_second_read_prompt(prompt: str, mode: str = "scene-led") -> str:
+    return (
+        prompt.replace(
+            CHECKER.READING_MODE_SENTENCES["entity-led"],
+            CHECKER.READING_MODE_SENTENCES[mode],
+        )
+        .replace(CHECKER.CORE_2_SENTENCES[True], CHECKER.CORE_2_SENTENCES[False])
+        .replace(CHECKER.ACCENT_SENTENCES[(True, True)], CHECKER.ACCENT_SENTENCES[(False, False)])
+        .replace(CHECKER.HIERARCHY_SENTENCES[True], CHECKER.HIERARCHY_SENTENCES[False])
+        .replace(CHECKER.EXPRESSION_SENTENCES["structural-wash"] + " ", "")
+        .replace(CHECKER.EXPRESSION_SENTENCES["transparent-glaze"] + " ", "")
+        .replace(CHECKER.EXPRESSION_SENTENCES["sparse-rhythm"] + " ", "")
+        .replace(CHECKER.PRESSURE_SENTENCES["contour-fragmentation"] + " ", "")
+    )
 
 
 def main() -> int:
@@ -118,143 +182,178 @@ def main() -> int:
 
     portable_contract = copy.deepcopy(BASE_CONTRACT)
     portable_contract["execution_profile"] = "portable-direct"
+    portable_contract["runtime"]["generated_path_delivery"] = "unavailable"
+    portable_contract["runtime"]["deterministic_typography_ready"] = False
+    portable_contract["runtime"]["resolved_profile"] = "portable-direct"
+    portable_contract["runtime"]["typography_assurance"] = "best-effort"
     cases.append(("portable-direct-valid", portable_prompt, portable_contract, True))
 
-    cases.append((
-        "full-title-leak-rejected",
-        full_prompt.replace("Keep the top-left", "Eyes Lifted. Keep the top-left"),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "missing-variation-interface",
-        full_prompt.replace("Give the subject clear scale and ample breathing room. ", ""),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "portable-full-branch-rejected",
-        full_prompt,
-        portable_contract,
-        False,
-    ))
-    cases.append((
-        "full-title-heading-rejected",
-        full_prompt.replace("OUTPUT CONTROL", "TITLE AND OUTPUT"),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "missing-neutral-field-relation",
-        full_prompt.replace("Separate this empty area clearly from the subject. ", ""),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "portable-long-edge-rejected",
-        portable_prompt.replace("shortest edge", "longest edge"),
-        portable_contract,
-        False,
-    ))
-    cases.append((
-        "portable-missing-dimension-caps",
-        portable_prompt.replace("cap width 35%, height 12%; ", ""),
-        portable_contract,
-        False,
-    ))
-    cases.append((
-        "missing-heading-separator",
-        full_prompt.replace("SUBJECT AND COMPOSITION\n\n", "SUBJECT AND COMPOSITION\n", 1),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "glued-heading-rejected",
-        full_prompt.replace("SUBJECT AND COMPOSITION\n\nRepaint", "SUBJECT AND COMPOSITIONRepaint", 1),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "duplicate-equivalent-ratio-rejected",
-        full_prompt.replace("Use a 4:5 canvas.", "Use a 4:5 canvas. This is exactly 8:10."),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "internal-workflow-term-rejected",
-        full_prompt.replace("Improve subject placement", "Use editorial-recompose. Improve subject placement"),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "negative-exclusion-list-rejected",
-        full_prompt.replace(
-            "Keep every painted form matte and tactile, with calm interiors and visible paper grain.",
-            "Avoid digital gloss and photographic texture.",
-        ),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "exact-palette-count-rejected",
-        full_prompt.replace(
-            "Use a limited palette drawn from the reference.",
-            "Use exactly three source-derived colors.",
-        ),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
-    cases.append((
-        "artifact-title-field-language-rejected",
-        full_prompt.replace(
-            "Keep the top-left calm and empty, with open paper and an even light value.",
-            "Reserve a quiet top-left title field.",
-        ),
-        copy.deepcopy(BASE_CONTRACT),
-        False,
-    ))
+    scene_contract = copy.deepcopy(BASE_CONTRACT)
+    scene_contract["semantic"]["reading"] = {
+        "mode": "scene-led",
+        "core_2_present": False,
+        "accent_count": 0,
+        "accent_functions": [],
+        "omission_policy": "omit-noncontributing-construction",
+    }
+    scene_contract["semantic"]["complexity_map"]["core_2"] = []
+    scene_contract["semantic"]["complexity_map"]["accents"] = []
+    scene_contract["semantic"]["watercolor_plan"]["core_2"] = []
+    scene_contract["semantic"]["watercolor_plan"]["accents"] = []
+    cases.append(("scene-led-without-detailed-subject-valid", no_second_read_prompt(full_prompt), scene_contract, True))
+
+    all_pressures = copy.deepcopy(BASE_CONTRACT)
+    all_pressures["semantic"]["complexity_map"]["core_1"] = list(CHECKER.PRESSURES)
+    all_pressures["semantic"]["open_mouth"] = False
+    all_pressures["variation"]["compatibility_checks"].append("transparent-overlap-safe")
+    all_pressure_prompt = full_prompt.replace(
+        CHECKER.PRESSURE_SENTENCES["micro-repetition"],
+        " ".join(CHECKER.PRESSURE_SENTENCES[item] for item in CHECKER.PRESSURES),
+    ).replace(CHECKER.OPEN_MOUTH_SENTENCE + " ", "")
+    cases.append(("all-protected-pressures-valid", all_pressure_prompt, all_pressures, True))
+
+    for name, sentence in (
+        ("missing-reading-mode", CHECKER.READING_MODE_SENTENCES["entity-led"]),
+        ("missing-core-one", CHECKER.CORE_1_SENTENCE),
+        ("missing-core-two", CHECKER.CORE_2_SENTENCES[True]),
+        ("missing-accent-branch", CHECKER.ACCENT_SENTENCES[(True, True)]),
+        ("missing-omission", CHECKER.OMISSION_SENTENCE),
+        ("missing-hierarchy", CHECKER.HIERARCHY_SENTENCES[True]),
+        ("missing-structural-wash", CHECKER.EXPRESSION_SENTENCES["structural-wash"]),
+        ("missing-transparent-glaze", CHECKER.EXPRESSION_SENTENCES["transparent-glaze"]),
+    ):
+        cases.append((name, full_prompt.replace(sentence + " ", ""), copy.deepcopy(BASE_CONTRACT), False))
+
+    wrong_route = copy.deepcopy(BASE_CONTRACT)
+    wrong_route["execution_profile"] = "portable-direct"
+    cases.append(("portable-on-full-runtime-rejected", portable_prompt, wrong_route, False))
+    cases.append(("portable-full-branch-rejected", full_prompt, portable_contract, False))
+    cases.append(("full-title-leak-rejected", full_prompt.replace("Keep the top-left", "Eyes Lifted. Keep the top-left"), copy.deepcopy(BASE_CONTRACT), False))
+    cases.append(("missing-heading-separator", full_prompt.replace("SUBJECT AND COMPOSITION\n\n", "SUBJECT AND COMPOSITION\n", 1), copy.deepcopy(BASE_CONTRACT), False))
+    cases.append(("duplicate-ratio-rejected", full_prompt.replace("Use a 4:5 canvas.", "Use a 4:5 canvas. This is exactly 8:10."), copy.deepcopy(BASE_CONTRACT), False))
+    cases.append(("internal-mode-term-rejected", full_prompt.replace("Let the clearest", "Use entity-led. Let the clearest"), copy.deepcopy(BASE_CONTRACT), False))
+    cases.append(("negative-list-rejected", full_prompt.replace(CHECKER.POSITIVE_SURFACE_ENDING, "Avoid digital gloss."), copy.deepcopy(BASE_CONTRACT), False))
+
+    bad_reading_mode = copy.deepcopy(BASE_CONTRACT)
+    bad_reading_mode["semantic"]["reading"]["mode"] = "bird-led"
+    cases.append(("object-specific-reading-mode-rejected", full_prompt, bad_reading_mode, False))
+
+    bad_pressure = copy.deepcopy(BASE_CONTRACT)
+    bad_pressure["semantic"]["complexity_map"]["core_1"].append("curly-hair")
+    cases.append(("object-pressure-rejected", full_prompt, bad_pressure, False))
+
+    absent_core_two_with_data = copy.deepcopy(scene_contract)
+    absent_core_two_with_data["semantic"]["complexity_map"]["core_2"] = ["value-fragmentation"]
+    cases.append(("absent-core-two-data-rejected", no_second_read_prompt(full_prompt), absent_core_two_with_data, False))
+
+    missing_core_two_structure = copy.deepcopy(BASE_CONTRACT)
+    missing_core_two_structure["semantic"]["watercolor_plan"]["core_2"] = ["lost-edge"]
+    cases.append(("core-two-without-structure-rejected", full_prompt, missing_core_two_structure, False))
+
+    no_accent_expression = copy.deepcopy(BASE_CONTRACT)
+    no_accent_expression["semantic"]["watercolor_plan"]["accents"] = []
+    cases.append(("present-accent-without-expression-rejected", full_prompt, no_accent_expression, False))
+
+    dominant_accent = copy.deepcopy(BASE_CONTRACT)
+    dominant_accent["semantic"]["watercolor_plan"]["accents"] = ["connected-form"]
+    cases.append(("dominant-accent-expression-rejected", full_prompt, dominant_accent, False))
+
+    zero_accent_with_function = copy.deepcopy(scene_contract)
+    zero_accent_with_function["semantic"]["reading"]["accent_functions"] = ["light"]
+    cases.append(("zero-accent-function-rejected", no_second_read_prompt(full_prompt), zero_accent_with_function, False))
+
+    unselected_expression = full_prompt.replace(
+        CHECKER.EXPRESSION_SENTENCES["sparse-rhythm"],
+        CHECKER.EXPRESSION_SENTENCES["sparse-rhythm"] + " " + CHECKER.EXPRESSION_SENTENCES["wet-bloom"],
+    )
+    cases.append(("unselected-expression-rejected", unselected_expression, copy.deepcopy(BASE_CONTRACT), False))
+
+    accent_pressure_leak = full_prompt.replace(
+        CHECKER.PRESSURE_SENTENCES["contour-fragmentation"],
+        CHECKER.PRESSURE_SENTENCES["contour-fragmentation"] + " " + CHECKER.PRESSURE_SENTENCES["periodic-repetition"],
+    )
+    cases.append(("accent-pressure-promotion-rejected", accent_pressure_leak, copy.deepcopy(BASE_CONTRACT), False))
+
+    legacy = copy.deepcopy(BASE_CONTRACT)
+    del legacy["semantic"]["reading"]
+    del legacy["semantic"]["complexity_map"]
+    del legacy["semantic"]["watercolor_plan"]
+    legacy["semantic"]["content_budget"] = {"support_relations": ["contact"]}
+    legacy["semantic"]["regions"] = {"primary": [], "focal": [], "support": [], "context": []}
+    cases.append(("legacy-content-budget-rejected", full_prompt, legacy, False))
 
     bad_recipe = copy.deepcopy(BASE_CONTRACT)
     bad_recipe["variation"]["axes"]["subject_scale"] = "intimate"
     cases.append(("recipe-lock-rejected", full_prompt, bad_recipe, False))
 
-    bad_trace = copy.deepcopy(BASE_CONTRACT)
-    bad_trace["variation"]["axes"]["trace_mode"] = "vertical-interruption"
-    cases.append(("trace-support-conflict", full_prompt, bad_trace, False))
-
-    bad_slot = copy.deepcopy(BASE_CONTRACT)
-    bad_slot["artifact"]["primary_title_slot"] = "top-right"
-    cases.append(("artifact-slot-mismatch", full_prompt, bad_slot, False))
-
     missing_check = copy.deepcopy(BASE_CONTRACT)
-    missing_check["variation"]["compatibility_checks"].remove("transparent-overlap-safe")
+    missing_check["variation"]["compatibility_checks"].remove("fragmented-edge-safe")
     cases.append(("missing-compatibility-check", full_prompt, missing_check, False))
 
     bad_ratio = copy.deepcopy(BASE_CONTRACT)
     bad_ratio["semantic"]["aspect_ratio"] = "8:10"
     cases.append(("non-normalized-ratio", full_prompt, bad_ratio, False))
 
-    unknown_pressure = copy.deepcopy(BASE_CONTRACT)
-    unknown_pressure["semantic"]["regions"]["primary"].append("curly-hair")
-    cases.append(("object-label-rejected", full_prompt, unknown_pressure, False))
+    old_contract = {"version": 5, "execution_profile": "artifact-full"}
+    cases.append(("version-five-rejected", full_prompt, old_contract, False))
 
-    old_contract = {
-        "version": 1,
-        "photo_mode": "poster-only",
-        "composition_mode": "editorial-recompose",
-    }
-    cases.append(("version-one-rejected", full_prompt, old_contract, False))
+    missing_runtime = copy.deepcopy(BASE_CONTRACT)
+    del missing_runtime["runtime"]
+    cases.append(("missing-runtime-rejected", full_prompt, missing_runtime, False))
 
+    wrong_interpreter = copy.deepcopy(BASE_CONTRACT)
+    wrong_interpreter["runtime"]["workspace_python_executable"] = str((HERE / "check_prompt.py").resolve())
+    cases.append(("wrong-workspace-interpreter-rejected", full_prompt, wrong_interpreter, False))
+
+    external_mismatch_result = checked(full_prompt, copy.deepcopy(BASE_CONTRACT), portable_contract["runtime"])
     failures: list[dict[str, object]] = []
     reports: list[dict[str, object]] = []
     for name, prompt, contract, expected_ok in cases:
         result = checked(prompt, contract)
-        reports.append({"name": name, "ok": result["ok"], "errors": result["errors"]})
+        report = {"name": name, "ok": result["ok"], "errors": result["errors"]}
+        reports.append(report)
         if result["ok"] is not expected_ok:
-            failures.append(reports[-1])
+            failures.append(report)
+
+    mismatch_report = {
+        "name": "external-runtime-mismatch-rejected",
+        "ok": external_mismatch_result["ok"],
+        "errors": external_mismatch_result["errors"],
+    }
+    reports.append(mismatch_report)
+    if external_mismatch_result["ok"] is not False:
+        failures.append(mismatch_report)
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        prompt_path = root / "prompt.txt"
+        contract_path = root / "contract.json"
+        runtime_path = root / "runtime-plan.json"
+        prompt_path.write_text(full_prompt, encoding="utf-8")
+        contract_path.write_text(json.dumps(BASE_CONTRACT), encoding="utf-8")
+        runtime_path.write_text(json.dumps({
+            "ok": True,
+            "runtime": BASE_RUNTIME,
+            "missing_capabilities": [],
+            "errors": [],
+        }), encoding="utf-8")
+        cli = subprocess.run(
+            [sys.executable, str(HERE / "check_prompt.py"), "--prompt", str(prompt_path), "--contract", str(contract_path), "--runtime", str(runtime_path)],
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        cli_report = json.loads(cli.stdout)
+        cli_ok = cli.returncode == 0 and cli_report.get("ok") is True
+        report = {"name": "cli-runtime-plan-valid", "ok": cli_ok, "errors": cli_report.get("errors")}
+        reports.append(report)
+        if not cli_ok:
+            failures.append(report)
 
     print(json.dumps(
-        {"passed": len(cases) - len(failures), "total": len(cases), "failures": failures},
+        {"passed": len(reports) - len(failures), "total": len(reports), "failures": failures},
         ensure_ascii=False,
         indent=2,
     ))

@@ -1,0 +1,14 @@
+# Keep source text stable across Windows and Unix checkouts.
+*.md text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.txt text eol=lf
+
+# These assets are hash-pinned and must retain their exact repository bytes.
+assets/fonts/OFL-LibreBaskerville.txt binary -eol
+*.ttf binary
+*.jpg binary
+*.jpeg binary
+*.png binary

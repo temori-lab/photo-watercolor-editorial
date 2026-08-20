@@ -16,7 +16,7 @@
     {
       "id": 3,
       "prompt": "这张花的照片背景很乱，但花、花瓣和茎都看得清。只生成水彩海报。",
-      "expected_output": "Uses poster-only evidence extraction, removes background clutter from the generated poster without modifying the upload, and renders translucent watercolor overlaps through compact text-only medium guidance.",
+      "expected_output": "Uses poster-only evidence extraction, removes background clutter from the generated poster without modifying the upload, and renders translucent watercolor overlaps with the organic style anchor.",
       "files": []
     },
     {
@@ -34,7 +34,7 @@
     {
       "id": 6,
       "prompt": "调用 photo-watercolor-editorial 处理这张普通随手拍。",
-      "expected_output": "Defaults to poster-only and auto composition, leaves the upload unchanged, locks the smallest literal subject before geometry, and applies transparent watercolor with no source pixels. It keeps only indispensable support, temporarily removes the remaining scene, and restores no more than one structural trace and one atmospheric trace when their absence would make the result generic. It never treats the whole snapshot as protected content.",
+      "expected_output": "Defaults to poster-only and auto composition, leaves the upload unchanged, resolves an entity-, event-, scene-, or abstract-led first reading, and applies transparent watercolor with no source pixels. It keeps an explanatory second-read core only when needed, admits zero to two eligible painterly accent groups, and omits noncontributing construction. It never treats the whole snapshot as protected content or invents a detailed subject for a scene-led source.",
       "files": []
     },
     {
@@ -106,7 +106,7 @@
     {
       "id": 18,
       "prompt": "一只黑色动物站在草地边，轮廓和朝向清楚，但毛发很杂。只生成 photo-watercolor-editorial 海报。",
-      "expected_output": "Preserves one recognizable continuous animal with decisive head and body contours, grounding, and broad dark color mass. Dense fur frequency becomes a broad connected value role rather than many small marks. The surrounding grass or atmosphere may use broader directional washes, while the animal interior stays calmer and does not acquire synthetic speckle or pseudo-anatomy.",
+      "expected_output": "Preserves one recognizable continuous animal with decisive head and body contours, grounding, and broad dark color mass as core 1. Dense fur frequency becomes a broad connected value role rather than many small marks. Grass enters only if it explains grounding as core 2 or passes all painterly-accent tests; it stays subordinate through structural wash, paper reserve, lost edge, or sparse rhythm rather than becoming a literal field. The animal interior remains calm without synthetic speckle or pseudo-anatomy.",
       "files": []
     },
     {
@@ -286,37 +286,37 @@
     {
       "id": 48,
       "prompt": "一位脸部清晰的卷发人物穿浅色格纹外套、托腮坐在花地前。花和天空只提供柔和气氛，不是主体。使用 auto 生成 photo-watercolor-editorial 海报。",
-      "expected_output": "Locks the person, source-supported painted face, curls, hand-to-cheek gesture, posture, and broad garment color structure. Select the flowers as one relational-support family because their recognizable category and surrounding placement explain the source setting: retain several readable violet flower heads and slender stems at uneven heights around the figure, but compress exact count, dense repetition, interior detail, placement, and meadow depth. A pale-blue atmospheric wash may remain only for a distinct sky or light function. Flowers stay lower contrast and less detailed than the person but must not collapse into anonymous color marks.",
+      "expected_output": "Locks the person, source-supported painted face, curls, hand-to-cheek gesture, posture, and broad garment color structure as core 1. If being among the flowers is necessary to the source-specific reading, that relation becomes core 2 without rebuilding the meadow. Source-supported foreground flowers and leaves may become subordinate accents through transparent violet and green glaze, wet bloom, lost edge, or sparse rhythm, including partial face overlap only when facial structure remains clear. Noncontributing meadow and sky construction is omitted.",
       "files": []
     },
     {
       "id": 49,
       "prompt": "人物在客厅里抱着一只面部清晰的猫，使用 source-locked；人物和猫的脸都按当前新版方式处理，但不要保留房间陈设。",
-      "expected_output": "Locks the person and cat as one relational group because the embrace carries the event. Source-locked preserves relative centers, scale, axes, contact, occlusion, the painted human face, and animal landmarks without locking the room. A minimal seat or arm support survives only if required for grounding. Other context is removed; a single compressed trace may return only if its absence makes the composition generic and it no longer reads as furniture or room perspective.",
+      "expected_output": "Locks the person-and-cat embrace as the first-read relational core. Source-locked preserves relative centers, scale, axes, contact, occlusion, the painted human face, and animal landmarks without locking the room. A seat, arm, enclosure, or interval becomes core 2 only when it materially explains the embrace or grounding. Eligible light or depth accents remain subordinate; furniture inventory and room perspective are omitted.",
       "files": []
     },
     {
       "id": 50,
       "prompt": "人物完整坐在一把结构复杂的椅子上，我要求主体完整，但椅子只是承托，背景还有很多装饰。生成 poster-only photo-watercolor-editorial 海报。",
-      "expected_output": "Applies Subject Completeness only to the locked person, not to the whole photograph or complete chair. Keep the chair only as one or two broad subordinate support planes required for seat contact and grounding, without ornament, legs, joints, or full construction. Remove decorative surroundings first and restore only a compressed non-object trace if its absence makes the source composition generic. Preserve the current painted face, complete body envelope, seated posture, and contact.",
+      "expected_output": "Applies Subject Completeness only to the locked person, not to the whole photograph or complete chair. Keep only the minimum chair portion required by visible seat contact and weight-bearing, without ornament, legs, joints, or full construction. Remove decorative surroundings; if specificity truly needs context, retain only one quiet cluster as incomplete low-contrast fragments separated by paper. Preserve the painted face, complete body envelope, seated posture, and contact.",
       "files": []
     },
     {
       "id": 51,
       "prompt": "一只面部和羽色特征可辨的鸟停在窗外树枝上，照片隔着带有数条横向窗棱的玻璃拍摄，周围枝叶和室内反光很多。用 auto 做 poster-only photo-watercolor-editorial 海报。",
-      "expected_output": "Locks the bird species cues, visible eye and gaze, beak structure, body axis, tail, feet, and perch relation before reducing context. Select foliage as one relational-support family: retain several recognizable broad leaf shapes and a few connecting stem directions around and behind the bird while compressing exact count, dense repetition, interior texture, branch network, and scenic depth. Remove reflections and literal window construction, then restore the window boundary only as one structural trace of no more than three broken horizontal charcoal strokes. Leaves remain quieter than the bird but must still read as leaves; preserve the animal face branch and choose orientation from the bird-and-perch envelope, not the window bars.",
+      "expected_output": "Uses the bird and reliable face cues as core 1, and the readable bird-perched-on-branch relation as core 2 rather than retaining only an arbitrary contact stub. Window mullions and glass reflections are not promoted to core 2 by camera overlap, but may become one or two source-supported framing/light accents through transparent ink glaze and sparse interrupted rhythm when safely subordinate. It omits the unused branch network and literal window grid, preserves the animal face branch, and chooses orientation from the protected hierarchy.",
       "files": []
     },
     {
       "id": 52,
       "prompt": "人物是主体，周围花叶和一片淡色洗只作为抽象陪衬。生成 photo-watercolor-editorial 海报，不要让陪衬铺满画面。",
-      "expected_output": "Keeps the person as the protected primary while compressing the subordinate flowers, foliage, atmospheric wash, and residual traces. It creates atmosphere through negative space, distance, pauses, asymmetry, scale contrast, and limited marks rather than decorative scene filling. It applies no percentage quota to either the abstract support motif or total negative space.",
+      "expected_output": "Keeps the person as core 1. It decides whether the person-among-flowers relation is needed as core 2 by removal impact rather than by physical contact. Source-supported flowers, foliage, light, or blur may enter as zero to two coherent accents only when they add depth, framing, rhythm, color, or atmosphere and translate through subordinate watercolor behavior. It omits the rest instead of filling the scene decoratively.",
       "files": []
     },
     {
       "id": 53,
       "prompt": "根据照片内容为水彩海报生成英文标题。照片里是一只鸟安静地停在枝头，标题不要空泛，也不要默认黑色。",
-      "expected_output": "Creates one natural, understated, source-grounded English title of two to five words and avoids empty Memory, Dream, or Moment defaults. It records one dark source-derived color, 6%-7% short-edge type size, a title bounding-box target near 1% of canvas area, 35% width and 12% height caps, and 10%-12% aligned inset. In artifact-full the title stays out of the ImageGen prompt and the finalizer renders it once with the bundled serif; in portable-direct ImageGen receives and renders it once. Neither branch adds a subtitle or extra text.",
+      "expected_output": "Creates one natural, understated, source-grounded English title of two to five words and avoids empty Memory, Dream, or Moment defaults. It records one dark source-derived color, a preferred rendered title-block height around 6%-7% of the long edge, adaptive type-size reduction above a 3% short-edge or 18-pixel legibility floor, a title bounding-box target near 1% of canvas area, 35% width and 12% height caps, and 10%-12% aligned inset. In artifact-full the title stays out of the ImageGen prompt and passes a normalized bundled-font preflight before contract freeze; in portable-direct ImageGen receives the adaptive visual target. Neither branch adds a subtitle or extra text.",
       "files": []
     },
     {
@@ -328,19 +328,19 @@
     {
       "id": 55,
       "prompt": "第一次在这个任务中用一张背景干净的单人照片生成 photo-watercolor-editorial 海报，没有指定风格参考图。",
-      "expected_output": "Uses the public edition's text-only rendering policy because the compact watercolor language is sufficient. It records the upload's evidence role internally but tells ImageGen only to repaint the upload entirely as watercolor. It generates one image and does not attach a bundled or external style image.",
+      "expected_output": "Classifies the context as fresh and resolves anchor_mode auto to text-only because the compact watercolor language is sufficient. It records the upload's evidence role internally but tells ImageGen only to repaint the upload entirely as watercolor. It generates one image and does not attach a bundled anchor by habit.",
       "files": []
     },
     {
       "id": 56,
-      "prompt": "照片隔着玻璃拍摄，带反光、几条重复窗格和大面积雾气。使用公开版的纯文本渲染策略生成水彩海报。",
-      "expected_output": "Builds a region-by-mechanism map rather than naming glass, grid, or fog categories: periodic-repetition is active in support and transparent-overlap is active in atmosphere. It emits each plain visual outcome once, reducing regular structure to a sparse softened interrupted rhythm and unifying translucent layers into broad overlaps or a controlled wash. It keeps rendering guidance text-only and attaches no style-reference image.",
+      "prompt": "照片隔着玻璃拍摄，带反光、几条重复窗格和大面积雾气。使用 anchor auto 生成水彩海报。",
+      "expected_output": "First applies the semantic gate: glass overlap, repeated panes, reflections, and fog do not become core 2 merely because the camera looks through them. Source-supported framing, light, or atmosphere may still qualify as accents when compositionally useful and safely subordinate, then use transparent-glaze, wet-bloom, lost-edge, or sparse-rhythm rather than literal pane reconstruction. Accent pressures remain diagnostics; it resolves anchor auto to text-only when an anchor would amplify transparent-overlap.",
       "files": []
     },
     {
       "id": 57,
       "prompt": "一只毛发很密的黑狗站在杂草和茂密树叶前，只生成简约水彩海报。",
-      "expected_output": "Maps both dog and vegetation by visual mechanism instead of object class. The primary activates micro-repetition, contour-fragmentation, and value-fragmentation; support activates micro-repetition and contour-fragmentation. The same canonical outcomes merge repeated units into connected shapes, absorb minor edge turns, and merge broken tone. It keeps the rendering instruction text-only and avoids wording that would amplify the active mechanisms.",
+      "expected_output": "Maps both dog and vegetation by visual mechanism instead of object class. The primary activates micro-repetition, contour-fragmentation, and value-fragmentation; support activates micro-repetition and contour-fragmentation. The same canonical outcomes merge repeated units into connected shapes, absorb minor edge turns, and merge broken tone. It rejects organic-edge because it would amplify the active mechanisms.",
       "files": []
     },
     {
@@ -358,25 +358,25 @@
     {
       "id": 60,
       "prompt": "边牧主体周围那片淡蓝背景洗染很有水彩感，但耳缘和脸颊毛束过碎。下一次不要把背景洗染一起删掉。",
-      "expected_output": "Separates background_watercolor from primary_surface_coherence. It preserves one broad translucent source-derived background wash outside the primary while mapping the subject's fragmented edge, repeated units, and broken tones to the universal mechanism outcomes. A successful atmospheric wash neither excuses primary fragmentation nor gets deleted during its correction.",
+      "expected_output": "Maps the connected animal to core 1 and the broad translucent source-derived wash to an eligible painterly accent. It marks reading_preserved failed when protected edges or facial structure fragment, while painterly_structure may still credit the subordinate wash. The successful accent neither excuses core fragmentation nor gets deleted during correction.",
       "files": []
     },
     {
       "id": 61,
-      "prompt": "严格比较两份纯文本渲染说明。云的标题、构图、色板和背景洗染都要完全一致，只允许水彩媒介措辞不同。",
-      "expected_output": "Compiles and freezes one complete core prompt before either attempt, then duplicates it into two fresh diagnostic tasks. Both tasks remain text-only and attach no style image; the second changes only the minimum watercolor-medium wording. Title, composition, subject lock, atmospheric trace, palette, exclusions, and all other rendering language remain byte-for-byte equivalent, and both final prompts are retained for drift audit.",
+      "prompt": "严格比较纯文本与 primary-watercolor 锚点。云的标题、构图、色板和背景洗染都要完全一致，只允许锚点不同。",
+      "expected_output": "Compiles and freezes one complete core prompt before either attempt, then duplicates it verbatim into two fresh tasks. The A task states text-only and supplies no anchor; the B task adds only the minimum style-only input-role and primary-watercolor override. Title, composition, subject lock, content budget, palette, exclusions, and all other rendering language remain byte-for-byte equivalent, and both final prompts are retained for drift audit.",
       "files": []
     },
     {
       "id": 62,
-      "prompt": "云的水彩版本背景大色洗很好，但云体内部仍像花椰菜和泡沫颗粒。如何判定这张图？",
-      "expected_output": "Credits the broad subordinate background wash on the background_watercolor axis when it is translucent, non-object-like, source-derived, and leaves clean ivory space. It independently marks primary_surface_coherence noncompliant because the cloud interior is built from repeated cauliflower or foam-like microstructure rather than a few connected washes. It does not collapse the two findings into one verdict or remove the background benefit.",
+      "prompt": "云的锚点版本背景大色洗很好，但云体内部仍像花椰菜和泡沫颗粒。如何判定这张图？",
+      "expected_output": "Credits the broad subordinate source-derived wash on painterly_structure when it leaves active paper and does not compete with core 1. It independently marks reading_preserved or painterly_structure failed, according to the owned root cause, when the cloud core becomes repeated cauliflower or foam-like microstructure rather than connected washes. It does not duplicate the same symptom across axes or erase the successful accent.",
       "files": []
     },
     {
       "id": 63,
-      "prompt": "云和长毛边牧的测试都有漂亮背景，但主体表面没有改善。以后纯文本渲染说明应如何调整？",
-      "expected_output": "Preserves the successful broad source-derived background wash in text and adjusts wording by active mechanisms, not by cloud or animal categories. Because the protected primary has micro-repetition, contour-fragmentation, value-fragmentation, or transparent-overlap, it strengthens connected washes and surface coherence without attaching a style-reference image or changing subject evidence.",
+      "prompt": "云和长毛边牧的 primary-watercolor 对照都有漂亮背景，但锚点没有改善主体。以后 anchor auto 应如何选择？",
+      "expected_output": "Preserves the successful broad source-derived background wash in text but resolves anchor auto by active mechanisms, not by cloud or animal categories. Because the protected primary has micro-repetition, contour-fragmentation, value-fragmentation, or transparent-overlap and the interface cannot isolate regions, it does not select primary-watercolor solely for background benefit. A controlled anchor experiment remains diagnostic only.",
       "files": []
     },
     {
@@ -400,7 +400,7 @@
     {
       "id": 67,
       "prompt": "为一只长毛边牧编译最终 ImageGen 提示词。内部分析可以完整，但最终提示词必须简洁，眼神和黑白脸谱要保留。",
-      "expected_output": "Keeps full analysis and mode labels in the structured contract. It emits exactly four plain-language blocks without padding, keeps every heading on its own line with blank separators, includes the normalized ratio exactly once, never exceeds 320 words, and passes scripts/check_prompt.py before sending the saved UTF-8 text verbatim to ImageGen.",
+      "expected_output": "Keeps full analysis and mode labels in the structured contract. It emits exactly four plain-language blocks without padding, keeps every heading on its own line with blank separators, includes the normalized ratio exactly once, never exceeds 480 words, and passes scripts/check_prompt.py before sending the saved UTF-8 text verbatim to ImageGen.",
       "files": []
     },
     {
@@ -411,14 +411,14 @@
     },
     {
       "id": 69,
-      "prompt": "这张照片可靠细节很多，请全部写入提示词，超过四百词也没关系。",
-      "expected_output": "Retains reliable evidence internally but compiles only contracted outcomes. It keeps modes, exact ratio, completeness, universal form, every selected mechanism, focal interface, watercolor medium, all title ratios, and output guardrails. It removes optional atmosphere or adjectives before any invariant and refuses an over-320-word prompt.",
+      "prompt": "这张照片可靠细节很多，请全部写入提示词，超过五百词也没关系。",
+      "expected_output": "Retains reliable evidence internally but compiles only contracted outcomes. It keeps modes, exact ratio, completeness, content budget, universal form, protected-region mechanisms, focal interface, watercolor medium, all title ratios, and output guardrails. It removes optional nuance before any invariant and refuses an over-480-word prompt.",
       "files": []
     },
     {
       "id": 70,
       "prompt": "四区块提示词已经写好，但第三块有一长串四十多个英文单词的负面词。现在直接生成。",
-      "expected_output": "Does not generate. It saves the exact prompt and prompt-contract JSON, runs scripts/check_prompt.py --contract, and treats the exclusion sentence over 25 words as a blocked gate. It repairs the compiled prompt without deleting contracted invariants or pasting internal analysis.",
+      "expected_output": "Does not send the invalid prompt. It saves the exact prompt and prompt-contract JSON, runs scripts/check_prompt.py --contract, treats the exclusion sentence over 25 words as a failed technical check, repairs the compiled prompt without deleting contracted invariants or pasting internal analysis, validates again, and then performs the required single generation.",
       "files": []
     },
     {
@@ -460,7 +460,7 @@
     {
       "id": 77,
       "prompt": "提示词为了省字，只写标题 compact scale 和 generous inset，没有写具体比例。现在生成。",
-      "expected_output": "Does not generate. The checker requires the portable-direct title invariants: 6%-7% type size of the shortest edge, around 1% title bounding-box area, 35% width and 12% height caps, and 10%-12% inset from aligned canvas edges. Word pressure never removes them. In artifact-full the deterministic finalizer enforces a 0.6%-2% bounding-box range while ink coverage remains diagnostic.",
+      "expected_output": "Does not send the incomplete prompt. The checker requires the portable-direct title invariants: rendered title-block height around 6%-7% of the longest edge, adaptive legible sizing, around 1% bounding-box area, 35% width and 12% height caps, and 10%-12% inset. It repairs and revalidates the prompt, then generates once. In artifact-full the local engine measures those values and reports any audit failure without withholding the poster.",
       "files": []
     },
     {
@@ -478,7 +478,7 @@
     {
       "id": 80,
       "prompt": "这张复杂照片同时有人物卷发、碎石积雪、玻璃反射、窗格和雾气，输出 1:1，并把差构图大幅重构。",
-      "expected_output": "Switches to orientation_mode user-ratio for the explicit numeric 1:1 request and uses one prompt contract with poster-rebuild, the selected face branch, and multiple mechanisms distributed across primary, focal, support, and atmosphere. It emits each canonical mechanism outcome only once, retains all title ratios, stays within 320 words by trimming optional nuance, and never creates object-specific classifiers.",
+      "expected_output": "Switches to orientation_mode user-ratio for the explicit numeric 1:1 request and uses one version-6 prompt contract with poster-rebuild, the selected face branch, semantic reading, complexity_map, and watercolor_plan. It distributes pressures across core_1, optional core_2, focal, and accents; emits canonical pressure outcomes only for core_1, core_2, or focal; retains all title ratios, stays within 480 words, and never creates object-specific classifiers.",
       "files": []
     },
     {
@@ -490,7 +490,7 @@
     {
       "id": 82,
       "prompt": "这个环境只有图片生成能力，没有本地 Python 或可读的输出路径。生成完整的 photo-watercolor-editorial 海报。",
-      "expected_output": "Selects execution_profile portable-direct without probing unavailable dependencies. It compiles the exact title, contracted corner, color, 6%-7% short-edge type size, approximately 1% title bounding-box target, width and height caps, inset, and no-extra-text rule into TITLE AND OUTPUT, then asks ImageGen once for the complete poster. It does not invoke the local finalizer or claim deterministic typography.",
+      "expected_output": "Selects execution_profile portable-direct without probing unavailable dependencies. It compiles the exact title, contracted corner, color, preferred rendered title-block height around 6%-7% of the longest edge, permission to reduce type size as needed while keeping it legible, approximately 1% title bounding-box target, width and height caps, inset, and no-extra-text rule into TITLE AND OUTPUT, then asks ImageGen once for the complete poster. It does not invoke the local finalizer or claim deterministic typography.",
       "files": []
     },
     {
@@ -520,7 +520,7 @@
     {
       "id": 87,
       "prompt": "Python 第一次加字后标题越界，但无字底图正常。",
-      "expected_output": "Treats the layout failure as locally recoverable. It discards the attempted title output and runs one fallback composition from the same immutable untitled base using the distinct contracted fallback slot and a new output path. It never overlays the fallback onto the titled result, never repeats identical parameters, and never calls ImageGen again.",
+      "expected_output": "Runs one local auto-finalization from the immutable untitled base. It measures primary, fallback, and the remaining corners in memory, selects the first passing field or the least-risk field, writes only one titled output, reports the selected tier and audit status, and never calls ImageGen again.",
       "files": []
     },
     {
@@ -532,7 +532,7 @@
     {
       "id": 89,
       "prompt": "ImageGen 返回的 21:9 底图是 1912×823；不要裁切，也不要重画。继续 artifact-full。",
-      "expected_output": "Normalizes 21:9 to 7:3 and computes relative ratio error, which is about 0.43% for 1912×823 and therefore passes the 1% tolerance. It keeps the immutable dimensions, uses short-edge font sizing with an inclusive upper bound rounded down, and proceeds to one deterministic primary title composition without cropping, stretching, padding, or resynthesis.",
+      "expected_output": "Normalizes 21:9 to 7:3 and computes relative ratio error, which is about 0.43% for 1912×823 and therefore passes the 1% tolerance. It keeps the immutable dimensions, targets a rendered title-block height around 6%-7% of the long edge, adaptively reduces type size above the legibility floor when necessary, and proceeds to one deterministic primary title composition without cropping, stretching, padding, or resynthesis.",
       "files": []
     },
     {
@@ -544,7 +544,7 @@
     {
       "id": 91,
       "prompt": "最终提示词出现 COMPOSITIONWatercolor、OUTPUTSet 和 colors.Avoid 这种粘连。",
-      "expected_output": "Does not generate. The checker requires each canonical heading on its own line, one blank line before each body, and one blank line between blocks. It rejects glued headings or sentences, preserves the validated prompt as UTF-8 text, and sends those saved bytes verbatim instead of rebuilding them through concatenation.",
+      "expected_output": "Does not send the malformed bytes. The checker requires each canonical heading on its own line, one blank line before each body, and one blank line between blocks. It repairs the separators, validates again, preserves the corrected UTF-8 text, and sends those saved bytes verbatim for the required single generation.",
       "files": []
     },
     {
@@ -575,6 +575,240 @@
       "id": 96,
       "prompt": "artifact-full 的提示词写了 Reserve a quiet top-left title field。",
       "expected_output": "Rejects title-field language. It instead says 'Keep the top-left calm and empty, with open paper and an even light value,' relates that empty area to the subject in plain spatial language, and leaves both the actual title and the later Python step outside the ImageGen prompt.",
+      "files": []
+    },
+    {
+      "id": 97,
+      "prompt": "artifact-full 的英文标题在原先 6%-7% 短边字号里放不下，但缩小后仍清晰且能满足面积、宽高和边距限制。不要重新生图。",
+      "expected_output": "Treats 6%-7% as the preferred rendered title-block height against the long edge rather than a hard font-size interval. The resolved-font preflight and finalizer search one-to-three-line layouts down to the larger of 3% short-edge size or 18 pixels. If strict geometry still cannot fit, it uses the 2% short-edge or 14-pixel emergency floor while preserving width, height, and inset caps, creates the poster, and reports audit_passed false instead of refusing delivery or calling ImageGen again.",
+      "files": []
+    },
+    {
+      "id": 98,
+      "prompt": "生成前不知道 ImageGen 将返回的具体文件名，但宿主保证生成成功后会给出可读本地路径；本地依赖、Pillow 和字体都可用。",
+      "expected_output": "Runs the executable runtime resolver with generated_path_delivery post-call-local. It treats path delivery as a capability rather than a pre-existing filename, resolves artifact-full, copies the resolver runtime object unchanged into the version-6 contract, and never downgrades to portable-direct merely because the future filename is not known yet.",
+      "files": []
+    },
+    {
+      "id": 99,
+      "prompt": "runtime-plan 显示 deterministic_typography_ready 为 true 且 resolved_profile 为 artifact-full，但合同手动写成 portable-direct。",
+      "expected_output": "Rejects the inconsistent contract and does not send that invalid prompt. It restores execution_profile artifact-full from the resolver evidence, recompiles the technical branch, validates again, and then proceeds with the required single ImageGen call. The rejected routing is never reported as a passed audit.",
+      "files": []
+    },
+    {
+      "id": 100,
+      "prompt": "prompt-contract.json 里的 runtime 与 resolve_execution_profile.py 输出的 runtime-plan.json 不一致。继续生成。",
+      "expected_output": "Rejects the stale contract, copies the external resolver runtime object unchanged into the version-6 contract, reruns technical validation, and then proceeds with the required single generation. It does not call ImageGen with mismatched runtime evidence or turn the failed check into a visual success claim.",
+      "files": []
+    },
+    {
+      "id": 101,
+      "prompt": "portable-direct 的提示词写了 10%-12% 边距，但成图实测只有 4%。报告已经合规。",
+      "expected_output": "Does not claim compliance. Portable-direct typography is unverified-best-effort: prompt validation is not pixel validation. It reports the measured title-layout failure plainly and requires a separately authorized artifact-full attempt for deterministic correction.",
+      "files": []
+    },
+    {
+      "id": 102,
+      "prompt": "artifact-full 已经生成最终 PNG，但本地排字报告没有 delivery_ready 和 title_layout_verified。直接说排字验证通过。",
+      "expected_output": "Separates the claims. ok means the finalizer executed technically, artifact_created proves that a poster file exists, and audit_passed records measured compliance. It reports generated-with-known-issues when the poster exists but title geometry or visual safety failed; preflight and prompt validation cannot substitute for the final audit.",
+      "files": []
+    },
+    {
+      "id": 103,
+      "prompt": "工作区依赖加载器返回的 Python 已有 Pillow，但系统 Python 没有。用系统 Python 跑解析器并降级 portable-direct。",
+      "expected_output": "Rejects the wrong-interpreter run, binds the exact Python returned by codex_app__load_workspace_dependencies, reruns the resolver with --workspace-python pointing to that same executable, and then continues toward the single generation. It never treats a different interpreter's missing Pillow as a valid downgrade or reports the failed run as passed.",
+      "files": []
+    },
+    {
+      "id": 104,
+      "prompt": "runtime-plan 声称 workspace_python_verified 为 true，但记录的 Python 路径与当前运行 check_prompt.py 的解释器不同。",
+      "expected_output": "Rejects the mismatched checker run, reruns it under the recorded workspace Python, and proceeds only with the corrected technical evidence. The failed invocation remains visible in the audit and does not cancel the final poster once corrected.",
+      "files": []
+    },
+    {
+      "id": 105,
+      "prompt": "工作区 Python 路径已经正确绑定并验证，但这个工作区 Python 本身确实无法导入 Pillow。",
+      "expected_output": "Allows a genuine portable-direct downgrade when image generation remains available. The runtime records the verified workspace interpreter, Pillow false, deterministic typography false, and best-effort typography; it does not search system Python or install packages during the task.",
+      "files": []
+    },
+    {
+      "id": 106,
+      "prompt": "用户指定电脑里安装的 Baskerville Old Face，不要用 Skill 自带字体。",
+      "expected_output": "Resolves the installed family through the local font registry or font directories, records its actual family, style, face index, absolute path, and SHA-256 in runtime evidence, and remeasures every line break, font size, bounding box, and inset with that exact face. It never reuses Libre Baskerville measurements.",
+      "files": []
+    },
+    {
+      "id": 107,
+      "prompt": "用户指定的本机字体不存在，但仍然要输出海报。",
+      "expected_output": "Falls back to the verified bundled editorial serif, records requested_source, requested_value, fallback_used true, and a warning, then remeasures and creates the poster. It does not claim that the requested family was used.",
+      "files": []
+    },
+    {
+      "id": 108,
+      "prompt": "合同颜色是深蓝灰，但实际水彩画主要是橄榄绿和暖灰，标题颜色要与画面协调。",
+      "expected_output": "With title_color_mode auto-harmonized, samples the generated watercolor rather than trusting the pre-generation hex value, excludes the paper field, derives one restrained dark ink from a dominant painted hue, checks local contrast, and reports requested_color, resolved_color, palette_anchor, and contrast metrics.",
+      "files": []
+    },
+    {
+      "id": 109,
+      "prompt": "primary 和 fallback 都压到复杂内容，但另外一个角落很安静。",
+      "expected_output": "Evaluates primary, fallback, and the remaining corners on the immutable base. It selects the first remaining corner that passes brightness, contrast, texture, edge-density, and paint-occupancy checks, labels selection_tier recovery, creates one poster, and does not call ImageGen again.",
+      "files": []
+    },
+    {
+      "id": 110,
+      "prompt": "四个角落都很复杂，审查全部失败，但这次仍然要得到一张海报。",
+      "expected_output": "Selects the highest-scoring least-risk field, creates one poster, sets artifact_created true, audit_passed false, and delivery_status generated-with-known-issues, and lists the failed checks. It never converts the failed visual audit into a pass and never retries ImageGen.",
+      "files": []
+    },
+    {
+      "id": 111,
+      "prompt": "finalizer 报告 changed_pixels_within_title_bbox 为 true，但没有真实比较像素。",
+      "expected_output": "Rejects the hard-coded claim. It renders an explicit grayscale title mask, compares the immutable base with the output, proves that changed pixels remain inside the nonzero mask, reports changed and expected pixel counts and bounds, and treats any outside-mask change as a technical failure.",
+      "files": []
+    },
+    {
+      "id": 112,
+      "prompt": "人物隔着玻璃站在栏杆后，栏杆在相机视角里覆盖身体。把栏杆当作人物支撑保留。",
+      "expected_output": "Rejects camera-angle overlap as a support relation. Unless the source visibly shows contact, weight-bearing, grasping, containing, or mutual interaction, the rail is discarded construction rather than protected support; it may not re-enter as a line, frame, rhythm, or directional trace.",
+      "files": []
+    },
+    {
+      "id": 113,
+      "prompt": "一只鸟确实站在树枝上，但树枝和整棵树都很复杂。",
+      "expected_output": "Records weight-bearing and contact, keeps only the minimum branch portion needed to read the perch, and discards the remaining tree construction. Any retained leaves consume the single contextual-cluster allowance and remain isolated low-contrast fragments separated by paper.",
+      "files": []
+    },
+    {
+      "id": 114,
+      "prompt": "主体本身已经足够具体，不需要任何陪衬。",
+      "expected_output": "Records core_2_present false and accent_count 0 when the first-read core is complete without another layer. It leaves complexity_map.core_2, complexity_map.accents, watercolor_plan.core_2, and watercolor_plan.accents empty, compiles the absent-core and no-accent branches, and does not invent a decorative substitute.",
+      "files": []
+    },
+    {
+      "id": 115,
+      "prompt": "非主体已经简化成低对比水彩，但背景建筑还是一个贯穿画面的完整轮廓。",
+      "expected_output": "Determines whether the building is a protected core, an eligible accent, or omitted before judging treatment. If it is omitted, a complete canvas-spanning reconstruction fails painterly_structure even at low contrast. If it is an accent, it must use a subordinate transparent, dissolved, reserved, or sparse-rhythm translation. The poster is still delivered with generated-with-known-issues and no ImageGen retry.",
+      "files": []
+    },
+    {
+      "id": 116,
+      "prompt": "旧合同还包含 trace_mode、support_mode 和 field-and-trace。直接说检查通过并生成。",
+      "expected_output": "Rejects the stale technical contract, does not claim that it passed, removes the retired structure-restoration axes, rebuilds a version-6 contract with reading, complexity_map, and watercolor_plan, validates again, and then performs the required single generation. The corrected workflow still aims to deliver one poster rather than treating the earlier failed check as a final refusal.",
+      "files": []
+    },
+    {
+      "id": 117,
+      "prompt": "拥挤街景里有一个明确人物，招牌、窗格、路灯、车流和人群都很多。做一张通用的极简水彩海报。",
+      "expected_output": "Selects an entity-, event-, or scene-led first reading by removal impact, then keeps one explanatory route, interval, crowd relation, or spatial structure as core 2 only when needed. It admits zero to two coherent source-supported accents for depth, framing, rhythm, light, color, or atmosphere and omits the rest. Signs, grids, lamps, traffic, and crowd never receive object-specific rules or automatic protection merely because they are visible.",
+      "files": []
+    },
+    {
+      "id": 118,
+      "prompt": "鸟是第一眼重点，鸟停在树枝上是第二层阅读；窗棱和玻璃反光只需要增加空间感。不要按鸟类照片写专用规则。",
+      "expected_output": "Records entity-led core 1 for the bird, core_2_present true for the perch relation, and one or two eligible framing/light accents for the source-supported mullions and reflections. It uses connected-form for core 1, structural-wash for core 2, and transparent-glaze plus sparse-rhythm for the accents. It does not create bird, branch, window, or reflection classifier categories or reconstruct the complete tree and window grid.",
+      "files": []
+    },
+    {
+      "id": 119,
+      "prompt": "两个人牵手往前走，人物是第一眼重点，但他们走在一条路上决定了事件方向。路边摊位不重要。",
+      "expected_output": "Uses an event-led first-read core for the walking pair and protects their count, contact, axes, and movement. The forward route or path becomes core 2 because removing it weakens direction and grounding, but it is carried through a simplified structural wash rather than a full street. Incidental stalls are omitted or admitted only as subordinate source-supported accents when all four eligibility tests pass.",
+      "files": []
+    },
+    {
+      "id": 120,
+      "prompt": "照片没有特别明确的单一主体，只有两侧树木夹出的天空、向上的通道感、明暗和色块关系。",
+      "expected_output": "Chooses scene-led rather than inventing a person, animal, or object. Core 1 is the reliable mass, interval, directional opening, or negative-space organization; core 2 is optional and absent unless another spatial relation materially explains it. Watercolor expressions preserve connected field structure, paper reserve, lost edges, and source-derived light or color without forcing an entity hierarchy.",
+      "files": []
+    },
+    {
+      "id": 121,
+      "prompt": "人物在紫色花丛中，前景虚化的花和叶子横跨脸部，但脸仍然可辨。希望水彩保留这种透明叠色。",
+      "expected_output": "Keeps the person and reliable painted face as core 1, and uses the person-among-flowers relation as core 2 only when its removal makes the reading generic. The source-supported foreground overlap may become a depth/color accent through diluted violet and green transparent glaze or wet bloom. It preserves head turn and facial landmarks, rejects opaque cover or guessed features, and keeps the accent below both core layers.",
+      "files": []
+    },
+    {
+      "id": 122,
+      "prompt": "这个元素很适合画成漂亮的湿画法晕染，但它既不来自原照片，也不帮助阅读。能不能把它加进去？",
+      "expected_output": "Rejects the proposed element. Watercolor affinity is evaluated only after semantic eligibility; an invented or noncontributing form cannot become an accent merely because wet-bloom would look attractive. The Skill may use non-objective watercolor behavior only when it is source-derived and compositionally subordinate.",
+      "files": []
+    },
+    {
+      "id": 123,
+      "prompt": "Prompt checker、字体预检和 finalizer 都执行成功了，但成图把第二层道路删掉了。请给出最终审查。",
+      "expected_output": "Internally sets technical_valid true but reading_preserved false, with one reading-owned root cause such as core-2-missing. It evaluates painterly_structure and title_safe independently, keeps overall audit_passed false, delivers the existing poster, and does not retry ImageGen. Because full review mode was not explicitly enabled, it does not volunteer the review result, road-failure explanation, axis names, booleans, status codes, successful script details, or evidence links. It answers a later specific question about the road truthfully.",
+      "files": []
+    },
+    {
+      "id": 124,
+      "prompt": "标题遮住脸、对比度低、局部纹理太乱，这三个表现来自同一个标题区域选择错误。审查时每一项都展开一遍。",
+      "expected_output": "Treats the explicit request to expand the review as full review mode. It owns the shared failure once under title_safe, preserves one deduplicated root cause, and displays the complete contrast, texture, edge-density, occupancy, collision, and geometry evidence without duplicating the cause across reading or painterly axes. It does not claim an audit pass.",
+      "files": []
+    },
+    {
+      "id": 125,
+      "prompt": "成图阅读、水彩结构和标题都通过了。请把所有内部检查指标逐条告诉用户。",
+      "expected_output": "Treats the explicit request for every internal check as full review mode. It preserves the creative transformation explanation, then displays runtime and prompt evidence, generation count, finalizer metrics, all four review axes, overall result, delivery status, and evidence paths. Passed axes own no root causes, and audit_passed is true only when all four axes are true.",
+      "files": []
+    },
+    {
+      "id": 126,
+      "prompt": "视觉审查失败了，所以不要给我海报。",
+      "expected_output": "Distinguishes review failure from technical impossibility. When an artifact exists, it still delivers the poster, internally records generated-with-known-issues, retains at most three deduplicated root causes, and makes no ImageGen retry. In default review mode it does not append the review failure, caveats, internal status code, or evidence links. Only a genuine technical impossibility can prevent artifact delivery.",
+      "files": []
+    },
+    {
+      "id": 127,
+      "prompt": "用这张照片制作水彩海报。",
+      "expected_output": "Defaults review_mode to off. Process updates discuss the first reading, optional second reading, selected watercolor accents, omissions, composition, paper, palette, and title relationship. The final response leads with the poster and a short transformation note. It does not expose runtime profiles, Python, scripts, preflight, gates, prompt validation, prompt links, hashes, word counts, ImageGen call counts, retry policy, metrics, audit pass or failure, root-cause caveats, axis names, booleans, delivery status codes, or internal evidence links.",
+      "files": []
+    },
+    {
+      "id": 128,
+      "prompt": "开启完整审查模式，然后用这张照片制作水彩海报。",
+      "expected_output": "Resolves review_mode to full before the first process update and keeps it global for the task. It shows the creative analysis plus the resolved execution profile, relevant dependency and font identity, prompt-contract and preflight evidence, exact saved prompt path, generation context and call count, finalizer metrics and pixel-mask verification, all four review axes, overall result, delivery status, root causes, and artifact and evidence paths.",
+      "files": []
+    },
+    {
+      "id": 129,
+      "prompt": "保持默认模式，只告诉我最后使用了什么字体。",
+      "expected_output": "Keeps review_mode off and answers only the requested font fact in plain language. It does not reveal unrelated runtime, validation, generation, finalizer, review, metric, or evidence-file details and does not promote the task into full review mode.",
+      "files": []
+    },
+    {
+      "id": 130,
+      "prompt": "海报已经生成。现在开启完整审查模式，把现有证据给我看。",
+      "expected_output": "Switches presentation to full and exposes the already recorded evidence. It does not rerun ImageGen, preflight, finalization, or another completed stage merely to populate the report, and it clearly marks any evidence that was unavailable rather than fabricating it.",
+      "files": []
+    },
+    {
+      "id": 131,
+      "prompt": "使用默认模式。海报生成了，但道路太淡，标题也压到人物边缘。",
+      "expected_output": "Keeps the poster deliverable and retains two internally owned root causes. Because the prompt itself explicitly identifies two visible issues, it may answer those requested observations plainly, but it does not append a separate visual-audit line, audit outcome, reading_preserved, title_safe, audit_passed, generated-with-known-issues, numeric metrics, gates, call-count rules, review-report links, prompt links, or contract links.",
+      "files": []
+    },
+    {
+      "id": 132,
+      "prompt": "保持默认模式。图片文件损坏，无法读取。",
+      "expected_output": "Does not pretend that an artifact exists. It states the actionable cause in plain language and asks for a readable source when needed, without dumping stack traces, runtime profiles, checker output, internal status codes, or unrelated diagnostics.",
+      "files": []
+    },
+    {
+      "id": 133,
+      "prompt": "把审查模式从关闭切换到完整，会不会再生成一张？",
+      "expected_output": "Explains that review_mode controls presentation only. It never changes the prompt, visual decisions, generation count, retry behavior, finalizer, source preservation, face policy, or artifact delivery, so switching the mode does not generate another image.",
+      "files": []
+    },
+    {
+      "id": 134,
+      "prompt": "这个 Skill 还在内部开发，所以默认把调试和门禁细节全展示出来。",
+      "expected_output": "Rejects the assumption. Development status does not enable full review mode. Unless the user explicitly turns the mode on, internal evidence remains complete but user-facing process updates and final delivery stay in the creative off-mode presentation.",
+      "files": []
+    },
+    {
+      "id": 135,
+      "prompt": "保持默认模式。内部审查认为建筑和招牌保留过多，并且已经保存了审查报告、最终提示词和生成合同。",
+      "expected_output": "Retains the failed painterly review and all evidence internally and still delivers the poster. It does not display a visual-audit failure line, the building-and-signage root cause, generated-with-known-issues, or links to the review report, final prompt, prompt contract, runtime plan, or other internal evidence. It does not claim that review passed.",
       "files": []
     }
   ]

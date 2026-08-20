@@ -1,67 +1,81 @@
-# Visual Complexity Classifier
+# Dual-Axis Watercolor Classifier
 
-Use this classifier for every source after subject, geometry, and evidence locks. It predicts where ImageGen may replace watercolor structure with noisy microstructure. It classifies visual mechanisms, never object categories.
+Use this classifier after [Semantic Reading and Content Budget](subject-salience-contract.md). The semantic axis decides what may appear. The watercolor axis decides how each eligible role is translated. Neither axis may silently change the other.
 
-## 1. Divide the selected design into regions
+## 1. Map eligible roles, not object categories
 
-Record all four regions even when one is empty:
+Record all four complexity regions even when one is empty:
 
-- `primary` — the protected subject or relational group;
+- `core_1` — the first-read semantic anchor;
+- `core_2` — the optional explanatory second read;
 - `focal` — the one area allowed the smallest reliable marks;
-- `support` — indispensable support or one recognizable relational-support family;
-- `atmosphere` — one broad source-derived wash or sparse trace outside the protected subject.
+- `accents` — zero to two eligible painterly accent groups.
 
-The same source object may occupy more than one region. Judge the visual behavior required in each region rather than assigning one label to the entire photograph.
+Do not classify omitted source construction. The same eligible form may occupy more than one region when it genuinely serves more than one function.
 
-## 2. Select every active pressure
+## 2. Diagnose every active complexity pressure
 
-Each region receives zero or more pressures. Multiple pressures may coexist. New or unfamiliar subjects must map to these mechanisms without adding a new object label.
+Each region receives zero or more mechanism pressures. Examples are diagnostic, not a closed taxonomy.
 
 ### `micro-repetition`
 
-Many small similar units would be required to describe the region literally. Examples include curls, strands, leaves, needles, grains, scales, chips, petals, snow granules, surface pores, or invented fantasy units. The examples are diagnostic only and never form a closed taxonomy.
-
-Required outcome: merge repeated small units into broad connected shapes. Preserve only a few evidence-bearing accents inside the focal zone; never distribute units evenly or enumerate them in the prompt.
+Many small similar units would be required for literal description. Merge them into broad connected shapes and keep only a few evidence-bearing focal accents.
 
 ### `contour-fragmentation`
 
-The outer or internal boundary contains many minor lobes, spikes, notches, wisps, branches, broken edges, or small profile turns.
-
-Required outcome: absorb minor edge turns into one long continuous boundary. Preserve only decisive terminals and major source-supported direction changes.
+The boundary contains many minor lobes, spikes, notches, wisps, branches, gaps, or profile turns. Absorb minor turns into long continuous boundaries while preserving decisive terminals.
 
 ### `value-fragmentation`
 
-Recognition appears to depend on many small light-dark patches, mottling, highlights, shadows, stains, reflections, or texture tiles.
-
-Required outcome: merge broken tonal patches into two to four connected value masses separated by a few long directional boundaries. Recognition must survive when local texture is mentally removed.
+Recognition appears to depend on many small light-dark patches, reflections, stains, or texture tiles. Merge them into a few broad connected value masses separated by long directional boundaries.
 
 ### `periodic-repetition`
 
-The region contains a regular or near-regular repeated system such as grids, windows, rails, tiles, scales, chain patterns, rows, or mechanical modules.
-
-Required outcome: keep no more than three softened or interrupted structural marks when the rhythm is source-specific; otherwise omit it. Never reconstruct the full repeat system.
+A regular or near-regular repeated system risks becoming a literal grid, row, rail, tile field, or module inventory. Preserve it only when it serves an eligible semantic role, then translate it as a sparse interrupted rhythm rather than reconstructing the full system.
 
 ### `transparent-overlap`
 
-Several translucent, reflective, diffused, smoky, cloudy, motion-blurred, or visually ambiguous layers compete in one region.
+Translucent, reflective, diffused, smoky, cloudy, motion-blurred, or visually ambiguous layers compete. Reduce them to one or two broad transparent overlaps while keeping protected structure clear.
 
-Required outcome: reduce interfering layers to one or two broad transparent overlaps or one controlled wash. Keep the protected subject boundary and focal landmarks structurally clear.
+Compile canonical pressure outcomes for `core_1`, `core_2`, and `focal`. Keep `accents` pressures as diagnostics because their expression modes already control visibility and subordination.
 
-## 3. Apply universal mark-scale invariants
+## 3. Assign watercolor-expression modes
 
-These invariants apply to every primary, including a subject whose objects and materials are absent from all examples:
+Record `watercolor_plan` for `core_1`, `core_2`, and `accents`. Use at most three modes per role and emit each selected sentence once.
+
+- `connected-form`: `Build the first-read core as one connected silhouette or coherent field from a few broad value masses and long directional boundaries, with one clear focal area and calm interiors.`
+- `structural-wash`: `Carry a source-supported relation or spatial structure through a simplified connected wash with reduced detail and contrast.`
+- `transparent-glaze`: `Use diluted transparent pigment for source-supported overlap or reflection without obscuring protected structure.`
+- `wet-bloom`: `Translate soft-focus or atmospheric evidence into broad wet-on-wet blooms instead of literal repeated units.`
+- `lost-edge`: `Let selected peripheral boundaries dissolve into paper while keeping their visual role readable.`
+- `paper-reserve`: `Use open paper as active light and negative space inside the selected composition.`
+- `sparse-rhythm`: `Translate repeated source structure into a sparse interrupted rhythm with visible paper between marks.`
+
+Enforce these role constraints:
+
+- `core_1` includes `connected-form`;
+- absent `core_2` has no pressure or expression entries;
+- present `core_2` includes `structural-wash` or `paper-reserve` so its explanatory relation remains legible;
+- zero accents have no pressure or expression entries;
+- present accents use at least one mode, never `connected-form` or `structural-wash`;
+- transparent or dissolved treatment never obscures a protected face, contact, interval, terminal, or core relation.
+
+This keeps a physical relation or road readable without reconstructing the tree or street, and lets reflective framing or soft foreground overlap survive as watercolor behavior without becoming a second subject.
+
+## 4. Apply universal structure invariants
 
 ```text
-outer_structure: one connected outer envelope
-value_structure: two to four connected value masses
+core_1: one connected outer envelope or coherent field
+value_structure: a few connected value masses
 boundary_structure: a few long directional boundaries
-focus_structure: one focal zone
-detail_distribution: a few evidence-bearing accents only inside that zone
+focal_structure: one focal zone when reliable focal evidence exists
+hierarchy: core 1 first; core 2 second; accents third
+detail_distribution: a few evidence-bearing accents only where their role requires them
 ```
 
-No pressure permits blur, an inventory of units, all-over texture, a decorative contour circuit, or equal detail across the image. The classifier changes rendering strategy, never source evidence, category, count, pose, identity, relationship, or geometry.
+No pressure or expression mode permits blur as concealment, all-over texture, literal unit inventory, decorative contour circuits, equal detail everywhere, or restoration of omitted construction.
 
-## 4. Resolve focal structure independently
+## 5. Resolve focal structure independently
 
 Record one `focal_mode`:
 
@@ -73,17 +87,12 @@ Record one `focal_mode`:
 - `animal-structure-only`
 - `other-structured-focal`
 
-Record `open_mouth` separately as `true` or `false`. Hair, coverings, weather, material, and background complexity never choose the face branch.
+Record `open_mouth` separately. Hair, weather, material, foreground overlap, and background complexity never choose the face branch. When `open_mouth: true`, preserve expression through a calm uninterrupted face plane and a broad dark mouth shape with a restrained warm note.
 
-When `open_mouth: true`, preserve the expression through a calm uninterrupted face plane and a broad dark mouth shape with a restrained warm note. This rule applies by focal geometry, not by species or surface category.
-
-## 5. Write the prompt contract
-
-Save one UTF-8 JSON file outside the ImageGen prompt:
+## 6. Version-6 semantic record
 
 ```json
 {
-  "version": 1,
   "photo_mode": "poster-only",
   "composition_mode": "editorial-recompose",
   "design_mode": "poster-rebuild",
@@ -92,18 +101,30 @@ Save one UTF-8 JSON file outside the ImageGen prompt:
   "completeness": "source-complete",
   "cue_groups": 3,
   "focal_mode": "animal-simplified-face",
-  "open_mouth": true,
-  "regions": {
-    "primary": ["micro-repetition", "contour-fragmentation", "value-fragmentation"],
-    "focal": ["micro-repetition"],
-    "support": [],
-    "atmosphere": ["transparent-overlap"]
+  "open_mouth": false,
+  "reading": {
+    "mode": "entity-led",
+    "core_2_present": true,
+    "accent_count": 1,
+    "accent_functions": ["framing", "light"],
+    "omission_policy": "omit-noncontributing-construction"
+  },
+  "complexity_map": {
+    "core_1": ["micro-repetition"],
+    "core_2": ["contour-fragmentation"],
+    "focal": [],
+    "accents": ["periodic-repetition", "transparent-overlap"]
+  },
+  "watercolor_plan": {
+    "core_1": ["connected-form"],
+    "core_2": ["structural-wash"],
+    "accents": ["transparent-glaze", "sparse-rhythm"]
   }
 }
 ```
 
-The checker validates the selected modes, exact aspect ratio, contract structure, focal interface, and canonical positive outcome for every selected mechanism. Do not put region names, pressure labels, or JSON markers into the ImageGen prompt.
+The checker validates the controlled fields and canonical outcomes, not the correctness of the visual judgment. Do not put role names, pressure labels, expression labels, or JSON markers into the ImageGen prompt.
 
 ## Validation
 
-Reject or revise when classification depends on naming an object or material; only one pressure is allowed despite visible coexisting mechanisms; a new subject triggers a new label; an object example is mistaken for a closed list; the face branch is inferred from surrounding texture; or any selected pressure lacks its required positive compression outcome.
+Reject or revise when role selection depends on an object taxonomy; a new subject creates a new classifier label; complexity pressure is mistaken for content permission; a necessary core 2 is absent; an ineligible accent is preserved because it looks painterly; an accent becomes connected and dominant; a present core 2 lacks structural expression; a protected pressure lacks its canonical outcome; or a scene-led source is forced through an entity-only hierarchy.

@@ -1,8 +1,8 @@
 # Recognizability Contract
 
-Keep the selected primary subject readable without restoring photographic realism. Resolve [Subject Lock and Residual Trace](subject-salience-contract.md) first, then apply this contract only to the locked primary subject before relational geometry. For reliable primary people or animals, resolve [Subject Face Policy](subject-face-policy.md) after the geometry lock.
+Keep recognizable content in core 1 or core 2 readable without restoring photographic realism. Resolve [Semantic Reading and Content Budget](subject-salience-contract.md) first, then apply this contract only to eligible literal cores before relational geometry. For reliable primary people or animals, resolve [Subject Face Policy](subject-face-policy.md) after the geometry lock.
 
-This contract controls recognizability inside the already selected literal scope. It may not promote support or residual traces into protected subjects, alter composition geometry, or override the selected face branch.
+This contract controls recognizability inside the already selected literal scope. It may not create a second-read core or accent, restore omitted construction, alter composition geometry, or override the selected face branch.
 
 ## Define the intended reading
 
@@ -31,7 +31,7 @@ Recognizability must not be achieved by replacing source geometry with a generic
 
 - Give each primary entity one continuous coherent main mass so count and separation remain readable.
 - Preserve every source-supported decisive terminal and pass its complete envelope to [Layout](layout-contract.md).
-- Preserve two to four decisive recognition edges per primary entity. Indispensable support remains minimal; selected traces remain nonliteral and subordinate.
+- Preserve two to four decisive recognition edges per protected entity. A literal core 2 stays simplified but readable; accents stay subordinate and receive no identity protection.
 - Keep major part relationships complete enough to avoid malformed fragments. Do not produce detached or floating pseudo-parts.
 - For interacting subjects, preserve the gap, contact point, overlap, facing direction, or shared axis that defines the interaction.
 - In `source-locked`, preserve the group members' relative centers, scale, height, axes, order, and negative-space signature. Move or scale the group only as one unit.
@@ -82,4 +82,4 @@ Reject or revise when:
 - uncertainty appears as a blurry face, broken anatomy, warped construction, or floating pseudo-feature;
 - every edge is soft, or every edge is outlined;
 - the title carries information the image should communicate visually.
-- recognizable primary subjects coexist with a faithful reconstruction of nonessential surroundings, or become generic because every source-specific trace was removed.
+- recognizable primary subjects coexist with a faithful reconstruction of nonessential surroundings, or become generic because protected recognition cues were removed.
