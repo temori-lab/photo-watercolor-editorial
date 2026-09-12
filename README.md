@@ -1,6 +1,6 @@
 # photo-watercolor-editorial
 
-`photo-watercolor-editorial` is a Codex Skill for turning one source photograph into a restrained watercolor editorial poster while preserving the supported subject, relationships, geometry, and facial evidence.
+`photo-watercolor-editorial` turns the moments you photograph into watercolor posters with a story, a sense of space, and a finished editorial layout. It builds a painting plan around what makes each photo special—a familiar face, an expressive pose, a relationship, or a fleeting patch of light—then shapes the composition through selective detail, flowing washes, and open paper. A photo-inspired English title, carefully placed serif typography, and colors drawn from the artwork bring the piece together. From reading the image to composing the final title, the Skill handles the art direction so you can start with a photo instead of a complicated prompt.
 
 ## Install
 
@@ -18,8 +18,6 @@ Keep the directory name unchanged. Codex will discover the Skill from its `SKILL
 - Prompt validation and deterministic title-composition scripts
 - Evaluation cases
 - Libre Baskerville, redistributed under the SIL Open Font License 1.1
-
-Photographic examples, regression-source photographs, identifiable portraits, and style-reference images are intentionally excluded from this public distribution. The public edition uses text-only watercolor direction.
 
 ## License
 
