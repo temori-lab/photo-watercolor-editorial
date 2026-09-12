@@ -31,10 +31,15 @@ This repository is publicly readable but is not OSI open source. Commercial use 
 
 See [LICENSE.md](LICENSE.md) and [NOTICE.md](NOTICE.md) for the exact scope and attribution.
 
-## Release provenance
+## Release notes
 
 ### v1.0.1
 
-Adds a photo-specific painting plan that defines retained support and atmosphere, connects broad value regions, and protects recognition-bearing details. Prompt validation now accepts supported paraphrases while retaining missing-meaning, conflict, and negation checks.
+This update refines how the Skill reads a photograph and turns it into a watercolor brief, with more deliberate decisions about form, detail, and atmosphere.
 
-- Recommended: use Astra to run this Skill.
+- **A painting plan tailored to each photo.** Before writing the prompt, the Skill identifies what makes the image recognizable, then plans its main light and dark shapes, important edges, and any meaningful overlaps.
+- **More deliberate detail and background choices.** The plan distinguishes essential subjects and supporting relationships from optional atmosphere, guiding what to retain, simplify, or omit while preserving the image's spatial meaning.
+- **Clearer watercolor direction.** Prompts describe connected areas of tone, selective detail, and transitions into paper, with texture and pigment effects supporting the larger composition.
+- **More flexible prompt validation.** The checker accepts alternative wording that conveys the required meaning while continuing to reject missing requirements, contradictions, and explicit negations.
+
+**Recommended:** use Astra to run this Skill.
