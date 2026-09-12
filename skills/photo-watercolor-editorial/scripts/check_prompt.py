@@ -425,6 +425,139 @@ def contains_sentence(text: str, sentence: str) -> bool:
     return normalize(sentence) in normalize(text)
 
 
+def has_meaning(text: str, groups: tuple[tuple[str, ...], ...]) -> bool:
+    """Return true only when every independent semantic signal is present.
+
+    These are deliberately small conjunctions, not keyword bags: a prompt must
+    express every part of the promised visual outcome, but it can do so in its
+    own scene-specific language.
+    """
+    return all(
+        any(re.search(pattern, text, re.IGNORECASE | re.DOTALL) for pattern in group)
+        for group in groups
+    )
+
+
+def negates_meaning(text: str, groups: tuple[tuple[str, ...], ...]) -> bool:
+    """Catch an explicit negation of a required outcome before generation."""
+    negator = r"(?:do not|don't|never|avoid|exclude|without)"
+    return any(
+        re.search(rf"\b{negator}\b.{{0,80}}(?:{'|'.join(group)})", text, re.IGNORECASE | re.DOTALL)
+        for group in groups
+    )
+
+
+def require_meaning(
+    text: str,
+    label: str,
+    groups: tuple[tuple[str, ...], ...],
+    errors: list[str],
+) -> bool:
+    if negates_meaning(text, groups):
+        errors.append(f"{label} is explicitly negated")
+        return False
+    if not has_meaning(text, groups):
+        errors.append(f"{label} is missing its required visual meaning")
+        return False
+    return True
+
+
+MEANING = {
+    "photo-poster-only": ((r"watercolou?r",), (r"upload|reference|photo",)),
+    "photo-include-original": (
+        (r"source[- ]faithful|unaltered photograph|original photograph",),
+        (r"surrounding|outside|around",),
+        (r"generated watercolou?r",),
+    ),
+    "source-locked": (
+        (r"unchanged|same|preserve",),
+        (r"relative scale|body axes|contact|gap|overlap|grounding|asymmetry",),
+    ),
+    "editorial-recompose": (
+        (r"placement|scale|recompos",),
+        (r"count|viewpoint|posture|relationship|event",),
+        (r"preserve|retain|keep",),
+    ),
+    "standard-editorial": (
+        (r"existing visual hierarchy|existing hierarchy",),
+        (r"spacing|separation|tonal balance",),
+    ),
+    "poster-rebuild": (
+        (r"framing",),
+        (r"open space|negative space",),
+        (r"tonal hierarchy|value hierarchy",),
+        (r"minimal support|essential support",),
+    ),
+    "source-complete": ((r"full|complete",), (r"silhouette|outer envelope",), (r"endpoints?|terminals?",), (r"frame",)),
+    "supported-envelope-completion": ((r"extend|complete",), (r"clipped|cropped",), (r"attachment|direction",)),
+    "unsupported-completion": ((r"simple|broad",), (r"category",), (r"silhouette|form",), (r"unsupported|uncertain",)),
+    "entity-led": ((r"subject|relational group",), (r"first[- ]read|first reading|lead",)),
+    "event-led": ((r"action|interaction|event",), (r"first[- ]read|first reading|lead",)),
+    "scene-led": ((r"scene|mass|route|interval|directional",), (r"first[- ]read|first reading|lead",)),
+    "abstract-led": ((r"color|light|mass|rhythm|negative space",), (r"first[- ]read|first reading|lead",)),
+    "core-1": ((r"first[- ]read core|primary core|main reading",), (r"category|event|spatial organization|spatial structure",), (r"preserve|retain|keep",)),
+    "core-2-present": ((r"second[- ]read|secondary",), (r"relation|event carrier|spatial structure",), (r"subordinate|lower",), (r"complete|explain",)),
+    "core-2-absent": ((r"second[- ]read|secondary",), (r"unnecessary|not needed|absent",), (r"first[- ]read|primary",)),
+    "accents-present": ((r"accent",), (r"source[- ]supported|from the reference",), (r"depth|framing|rhythm|light|color|atmosphere",), (r"subordinate|lower salience|below",)),
+    "accents-absent": ((r"no additional|no extra",), (r"accent",), (r"open paper|negative space",)),
+    "omission": ((r"omit|remove|discard",), (r"construction|background",), (r"protected reading|main reading|contribut",)),
+    "hierarchy": ((r"thumbnail",), (r"lead|first",), (r"normal viewing|normal size|full size",)),
+    "connected-form": ((r"connected silhouette|coherent field|connected outer",), (r"broad value masses|broad values",), (r"long boundaries|long directional",), (r"focal",)),
+    "structural-wash": ((r"relation|spatial structure",), (r"simplified|reduce",), (r"wash",), (r"detail|contrast",)),
+    "transparent-glaze": ((r"transparent|diluted",), (r"overlap|reflection",), (r"clear|readable|preserve",)),
+    "wet-bloom": ((r"soft[- ]focus|atmospheric",), (r"wet[- ]on[- ]wet|bloom",), (r"broad",)),
+    "lost-edge": ((r"peripheral|outer",), (r"dissolve|lost edge|fade",), (r"paper",)),
+    "paper-reserve": ((r"open paper|paper reserve",), (r"light|negative space",)),
+    "sparse-rhythm": ((r"repeated|repeat",), (r"\b(?:sparse|interrupted)\b",), (r"paper",)),
+    "micro-repetition": ((r"repeated details|small repeated|micro",), (r"merge|group|combine",), (r"broad connected",)),
+    "contour-fragmentation": ((r"minor edge turns|small edge",), (r"long continuous|long boundary",), (r"endpoints?|terminals?",)),
+    "value-fragmentation": ((r"broken light|broken.*dark|fragmented value",), (r"unify|group|combine",), (r"broad.*value",)),
+    "periodic-repetition": ((r"regular repetition|regular rhythm|periodic",), (r"sparse|soften|interrupt",)),
+    "transparent-overlap": ((r"translucent|transparent",), (r"layers?|overlap",), (r"broad|controlled",)),
+    "human-painted-face": ((r"facial turn|face turn",), (r"asymmetry",), (r"value planes|broad values",), (r"landmarks?|focal",)),
+    "human-structure-face": ((r"head direction",), (r"expression",), (r"facial value planes|broad values",)),
+    "human-faceless": ((r"head direction",), (r"hair|neck|shoulders?|gesture",), (r"unmarked|blank|clean",), (r"face|facial plane",)),
+    "animal-simplified-face": ((r"gaze|eye direction",), (r"head axis|head direction",), (r"facial color division|face.*color",), (r"connected",)),
+    "animal-structure-only": ((r"head",), (r"silhouette",), (r"direction",), (r"endpoints?|terminals?|color division",)),
+    "other-structured-focal": ((r"axis",), (r"connected plane|broad plane",), (r"terminal",), (r"focal",)),
+    "open-mouth": ((r"face plane",), (r"mouth",), (r"dark",), (r"warm",)),
+}
+
+
+def variation_meaning(axis: str, value: Any) -> tuple[tuple[str, ...], ...]:
+    """Map a selected presentation axis to observable visual intent, not wording."""
+    return {
+        ("subject_placement", "upper-third"): ((r"upper third|upper portion",),),
+        ("subject_placement", "lower-third"): ((r"lower third|lower portion",),),
+        ("subject_placement", "lateral-balance"): ((r"off[- ]center|side",), (r"balance|counterweight",), (r"open paper|negative space",)),
+        ("subject_placement", "diagonal-counterweight"): ((r"diagonal",), (r"balance|counterweight",), (r"wash|shape",)),
+        ("subject_scale", "intimate"): ((r"fill much|large in the frame|intimate",), (r"complete silhouette|full silhouette",)),
+        ("subject_scale", "balanced"): ((r"clear scale|balanced scale|scale",), (r"breathing room|room around",)),
+        ("subject_scale", "small-in-field"): ((r"small",), (r"broad field|open paper",)),
+        ("negative_space", "top-field"): ((r"open paper|negative space",), (r"above|top",)),
+        ("negative_space", "side-field"): ((r"open paper|negative space",), (r"beside|side",)),
+        ("negative_space", "lower-field"): ((r"open paper|negative space",), (r"below|bottom",)),
+        ("negative_space", "split-field"): ((r"two quiet fields|split field",), (r"open paper|negative space",)),
+        ("edge_mode", "crisp-focal-dissolved-periphery"): ((r"crisp|clear",), (r"focal",), (r"dissolve|lost edge|soften",), (r"periphery|outer",)),
+        ("edge_mode", "wet-contour"): ((r"wet contour|wet edge",), (r"important boundary|key boundary",)),
+        ("edge_mode", "dry-brush-terminals"): ((r"dry[- ]brush",), (r"terminals?|endpoints?",)),
+        ("focal_contrast", "quiet"): ((r"quiet|low",), (r"focal contrast|contrast.*focal",)),
+        ("focal_contrast", "moderate"): ((r"moderate",), (r"focal contrast|contrast.*focal",)),
+        ("focal_contrast", "strong-local"): ((r"strong",), (r"focal zone|focal area",), (r"contrast",)),
+        ("wash_mode", "halo"): ((r"incomplete|partial",), (r"translucent wash",), (r"surround",)),
+        ("wash_mode", "directional-drift"): ((r"broad.*wash",), (r"dominant direction|directional",), (r"drift|move",)),
+        ("wash_mode", "edge-bloom"): ((r"wet.*bloom|bloom",), (r"outer edge|edge",)),
+        ("wash_mode", "horizon-haze"): ((r"horizontal|low",), (r"haze|diffuse wash",)),
+        ("wash_mode", "sparse-cloud"): ((r"separated|sparse",), (r"translucent blooms|blooms",), (r"open paper",)),
+        ("wash_polarity", "light-field"): ((r"light|airy",), (r"paper[- ]led|paper",)),
+        ("wash_polarity", "midtone-field"): ((r"midtone",), (r"generous paper|paper visible",)),
+        ("wash_polarity", "localized-dark-counterweight"): ((r"localized|local",), (r"dark",), (r"counterweight|balance",)),
+        ("palette_size", 2): ((r"very limited palette|two[- ]color palette",), (r"reference",)),
+        ("palette_size", 3): ((r"limited(?:[ -][a-z]+){0,2} palette",), (r"reference",)),
+        ("palette_size", 4): ((r"restrained palette|moderate variation",), (r"reference",)),
+    }.get((axis, value), ())
+
+
 def parse_blocks(text: str) -> tuple[dict[str, str], list[str]]:
     errors: list[str] = []
     matches = list(
@@ -1001,38 +1134,38 @@ def check(text: str, contract: dict[str, Any]) -> dict[str, object]:
     medium = blocks.get("MEDIUM AND FIELD", "")
     output = blocks.get(FULL_OUTPUT_HEADING, "") or blocks.get(PORTABLE_OUTPUT_HEADING, "")
 
-    if scope and not scope.rstrip().endswith(SCOPE_ENDING):
-        errors.append(f"subject block must end with: {SCOPE_ENDING}")
+    if scope and not has_meaning(scope, ((r"show|paint|render",), (r"open paper|negative space",))):
+        errors.append("subject block must close with a positive, bounded image scope")
     for key, sentence_map in (
         ("composition_mode", COMPOSITION_SENTENCES),
         ("design_mode", DESIGN_SENTENCES),
         ("completeness", COMPLETENESS_SENTENCES),
     ):
         selected = semantic[key]
-        if selected in sentence_map and not contains_sentence(scope, sentence_map[selected]):
-            errors.append(f"subject block is missing the selected {key} interface")
+        requirement = MEANING.get(selected)
+        if selected in sentence_map and requirement:
+            require_meaning(scope, f"selected {key}", requirement, errors)
     ratio = semantic["aspect_ratio"]
-    if ratio and not re.search(rf"\bUse an?\s+{re.escape(ratio)}\s+canvas\b", scope, re.IGNORECASE):
-        errors.append("subject block is missing the exact contracted aspect ratio")
+    if ratio and not re.search(rf"\b(?:use|on|at|format)\b.{{0,30}}\b{re.escape(ratio)}\s+canvas\b", scope, re.IGNORECASE):
+        errors.append("subject block is missing the contracted aspect ratio")
     prompt_ratios = re.findall(r"\b[1-9]\d*:[1-9]\d*\b", text)
     if ratio and prompt_ratios != [ratio]:
         errors.append("prompt must contain the contracted aspect ratio exactly once and no equivalent duplicate")
-    photo_sentence = PHOTO_SENTENCES.get(semantic["photo_mode"], "")
-    if photo_sentence and not contains_sentence(scope, photo_sentence):
-        errors.append("subject block is missing the selected plain-language photo interface")
+    photo_mode = semantic.get("photo_mode")
+    photo_requirement = MEANING.get(f"photo-{photo_mode}") if isinstance(photo_mode, str) else None
+    if photo_requirement:
+        require_meaning(scope, "selected photo treatment", photo_requirement, errors)
     reading = semantic["reading"]
     core_2_present = reading["core_2_present"] is True
     accents_present = reading["accent_count"] in {1, 2}
-    for label, sentence in (
-        ("reading-mode interface", READING_MODE_SENTENCES.get(reading["mode"], "")),
-        ("first-read core", CORE_1_SENTENCE),
-        ("second-read core branch", CORE_2_SENTENCES[core_2_present]),
-        ("painterly-accent branch", ACCENT_SENTENCES[(core_2_present, accents_present)]),
-        ("noncontributing-construction omission", OMISSION_SENTENCE),
-        ("viewing-scale hierarchy", HIERARCHY_SENTENCES[core_2_present]),
-    ):
-        if sentence and not contains_sentence(scope, sentence):
-            errors.append(f"subject block is missing the canonical {label} sentence")
+    reading_requirement = MEANING.get(reading["mode"])
+    if reading_requirement:
+        require_meaning(scope, "reading-mode outcome", reading_requirement, errors)
+    require_meaning(scope, "first-read core", MEANING["core-1"], errors)
+    require_meaning(scope, "second-read branch", MEANING["core-2-present" if core_2_present else "core-2-absent"], errors)
+    require_meaning(scope, "painterly-accent branch", MEANING["accents-present" if accents_present else "accents-absent"], errors)
+    require_meaning(scope, "omission boundary", MEANING["omission"], errors)
+    require_meaning(scope, "viewing-scale hierarchy", MEANING["hierarchy"], errors)
 
     selected_expressions = sorted(
         {mode for values in semantic["watercolor_plan"].values() for mode in values}
@@ -1040,17 +1173,17 @@ def check(text: str, contract: dict[str, Any]) -> dict[str, object]:
     missing_expression_outcomes = [
         mode
         for mode in selected_expressions
-        if not contains_sentence(primary, EXPRESSION_SENTENCES[mode])
+        if not has_meaning(primary, MEANING[mode])
     ]
     if missing_expression_outcomes:
         errors.append(
-            "missing canonical watercolor expression outcomes: "
+            "missing required watercolor expression meanings: "
             + ", ".join(missing_expression_outcomes)
         )
     unexpected_expression_outcomes = [
         mode
         for mode in EXPRESSION_MODES
-        if mode not in selected_expressions and contains_sentence(primary, EXPRESSION_SENTENCES[mode])
+        if mode not in selected_expressions and has_meaning(primary, MEANING[mode])
     ]
     if unexpected_expression_outcomes:
         errors.append(
@@ -1069,15 +1202,20 @@ def check(text: str, contract: dict[str, Any]) -> dict[str, object]:
     missing_pressure_outcomes = [
         pressure
         for pressure in protected_pressures
-        if not contains_sentence(primary, PRESSURE_SENTENCES[pressure])
+        if not has_meaning(primary, MEANING[pressure])
     ]
     if missing_pressure_outcomes:
-        errors.append("missing canonical pressure outcomes: " + ", ".join(missing_pressure_outcomes))
+        errors.append("missing required pressure meanings: " + ", ".join(missing_pressure_outcomes))
     unexpected_pressure_outcomes = [
         pressure
         for pressure in PRESSURES
         if pressure not in protected_pressures
-        and contains_sentence(primary, PRESSURE_SENTENCES[pressure])
+        # A selected transparent glaze necessarily describes a transparent
+        # overlap visually.  The contract keeps that pressure diagnostic when
+        # it belongs only to accents, so treating the shared language as a
+        # conflict would reject a valid accent treatment.
+        and not (pressure == "transparent-overlap" and "transparent-glaze" in selected_expressions)
+        and has_meaning(primary, MEANING[pressure])
     ]
     if unexpected_pressure_outcomes:
         errors.append(
@@ -1085,16 +1223,16 @@ def check(text: str, contract: dict[str, Any]) -> dict[str, object]:
             + ", ".join(unexpected_pressure_outcomes)
         )
     focal_mode = semantic["focal_mode"]
-    if focal_mode != "none" and focal_mode in FOCAL_SENTENCES and not contains_sentence(primary, FOCAL_SENTENCES[focal_mode]):
-        errors.append(f"focal mode '{focal_mode}' is missing its canonical outcome")
-    if semantic["open_mouth"] and not contains_sentence(primary, OPEN_MOUTH_SENTENCE):
-        errors.append("open-mouth focal structure is missing its canonical outcome")
+    if focal_mode != "none" and focal_mode in FOCAL_SENTENCES:
+        require_meaning(primary, f"focal mode '{focal_mode}'", MEANING[focal_mode], errors)
+    if semantic["open_mouth"]:
+        require_meaning(primary, "open-mouth focal structure", MEANING["open-mouth"], errors)
 
     missing_variation: list[str] = []
     for axis, block_name in VARIATION_BLOCKS.items():
         selected = variation["axes"].get(axis)
-        sentence = VARIATION_INTERFACES[axis].get(selected)
-        if sentence and not contains_sentence(blocks.get(block_name, ""), sentence):
+        requirement = variation_meaning(axis, selected)
+        if requirement and not has_meaning(blocks.get(block_name, ""), requirement):
             missing_variation.append(axis)
     if missing_variation:
         errors.append("missing selected variation interfaces: " + ", ".join(missing_variation))
@@ -1114,13 +1252,22 @@ def check(text: str, contract: dict[str, Any]) -> dict[str, object]:
     if negative_instructions:
         errors.append("prompt uses negative instruction inventory instead of positive visual outcomes")
 
-    medium_missing = [label for label, pattern in MEDIUM_REQUIREMENTS.items() if not re.search(pattern, medium, re.IGNORECASE)]
+    medium_requirements = {
+        "watercolor": ((r"watercolou?r",),),
+        "paper": ((r"cold[- ]pressed|textured watercolor",), (r"paper",)),
+        "broad washes": ((r"broad|large",), (r"translucent|transparent",), (r"washes?|wash",)),
+        "overlap behavior": ((r"wet[- ]on[- ]wet|soft bleed|soft merge",),),
+        "pigment variation": ((r"pigment pooling|pooled pigment|settled pigment",),),
+        "paper light": ((r"paper showing through|visible paper|paper reserve",), (r"highlight|light|negative space",)),
+        "separated color": ((r"clean color separation|separated color|clear color",),),
+    }
+    medium_missing = [label for label, requirement in medium_requirements.items() if not has_meaning(medium, requirement)]
     if medium_missing:
         errors.append("medium block is missing invariants: " + ", ".join(medium_missing))
     if re.search(r"(?m)^\s*(?:Exclude|Avoid)\b", medium, re.IGNORECASE):
         errors.append("medium block must use positive surface language instead of an exclusion list")
-    if medium and not medium.rstrip().endswith(POSITIVE_SURFACE_ENDING):
-        errors.append(f"medium block must end with: {POSITIVE_SURFACE_ENDING}")
+    if medium and not has_meaning(medium, ((r"matte|tactile",), (r"calm interiors?|quiet interiors?",), (r"paper grain|grain",))):
+        errors.append("medium block must specify a calm, matte, paper-grain surface")
 
     profile = contract["execution_profile"]
     title_text = artifact["title_text"]
@@ -1130,21 +1277,24 @@ def check(text: str, contract: dict[str, Any]) -> dict[str, object]:
         if FULL_OUTPUT_HEADING not in blocks:
             errors.append("artifact-full must use the neutral OUTPUT CONTROL heading")
         reserve_sentence = FULL_FIELD_INTERFACES.get(title_slot, "")
-        if reserve_sentence and not contains_sentence(scope, reserve_sentence):
+        if reserve_sentence and not has_meaning(scope, ((re.escape(title_slot.split("-")[0]),), (r"calm|quiet|empty",), (r"open paper|paper",))):
             errors.append("artifact-full subject block is missing the contracted neutral field")
         relation_sentence = FULL_FIELD_RELATION_INTERFACES.get(
             variation["axes"].get("typography_relation"), ""
         )
-        if relation_sentence and not contains_sentence(scope, relation_sentence):
+        relation_meaning = {
+            "aligned-axis": ((r"empty area|open paper|quiet field",), (r"dominant axis|direction",)),
+            "counter-axis": ((r"empty area|open paper|quiet field",), (r"counterbalance|balance",)),
+            "quiet-corner": ((r"empty area|open paper|quiet field",), (r"separate|apart|clear",), (r"subject",)),
+        }.get(variation["axes"].get("typography_relation"), ())
+        if relation_sentence and relation_meaning and not has_meaning(scope, relation_meaning):
             errors.append("artifact-full subject block is missing the selected field relation")
         if title_occurrences != 0:
             errors.append(f"artifact-full prompt must not reveal the title, found {title_occurrences} occurrence(s)")
         if re.search(r"\b(?:title|typography|subtitle)\b", text, re.IGNORECASE):
             errors.append("artifact-full prompt must not mention title or typography concepts")
-        if not contains_sentence(output, FULL_OUTPUT_SENTENCE):
+        if not has_meaning(output, ((r"finished.*watercolou?r|watercolou?r.*artwork",), (r"open.paper|paper area",), (r"calm|empty|unmarked",))):
             errors.append("artifact-full output block is missing the neutral untitled-base instruction")
-        if output and not output.rstrip().endswith(FULL_OUTPUT_SENTENCE):
-            errors.append(f"artifact-full output block must end with: {FULL_OUTPUT_SENTENCE}")
         if PORTABLE_OUTPUT_ENDING in output:
             errors.append("artifact-full prompt contains portable-direct output language")
     elif profile == "portable-direct":

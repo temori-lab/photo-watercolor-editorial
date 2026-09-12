@@ -14,7 +14,7 @@ Use this layer for watercolor medium, paper, palette, edge behavior, and renderi
 
 ## Mechanism translation
 
-Use the exact canonical sentence for every pressure selected in `core_1`, `core_2`, or `focal`. Accent pressures remain diagnostic because the selected accent expressions already govern their visible treatment. These sentences are architectural interfaces between classifier, compiler, and checker; keep them concise and object-independent.
+For every pressure selected in `core_1`, `core_2`, or `focal`, state its visual result in source-specific language. Accent pressures remain diagnostic because the selected accent expressions already govern their visible treatment. The checker requires the meaning below through multiple signals; it does not require a literal sentence. Keep the result concise and object-independent.
 
 - `micro-repetition`: `Merge repeated details into broad connected shapes with a few recognition-bearing focal accents.`
 - `contour-fragmentation`: `Absorb minor edge turns into long continuous boundaries while preserving decisive endpoints.`
@@ -22,7 +22,7 @@ Use the exact canonical sentence for every pressure selected in `core_1`, `core_
 - `periodic-repetition`: `Reduce regular repetition to a sparse, softened, interrupted rhythm.`
 - `transparent-overlap`: `Unify translucent layers into broad overlaps or a controlled wash.`
 
-Emit each protected mechanism sentence once, even when it occurs in multiple protected regions. Never name an object merely to activate a rendering rule or preserve an omitted form.
+Cover each protected mechanism once, even when it occurs in multiple protected regions. Never name an object merely to activate a rendering rule or preserve an omitted form.
 
 ## Focal translation
 
@@ -33,10 +33,10 @@ Emit each protected mechanism sentence once, even when it occurs in multiple pro
 - `animal-structure-only`: `Carry the head through its full silhouette, direction, decisive endpoints, and major color division, with a calm interior.`
 - `other-structured-focal`: `Preserve only the source-supported axis, connected plane, and decisive terminal shapes inside one focal zone.`
 
-When `open_mouth` is true, add exactly this positive structure: `Use a calm uninterrupted face plane and a broad dark mouth shape with a restrained warm note.`
+When `open_mouth` is true, describe a calm face plane, a broad dark mouth shape, and a restrained warm note in natural source-specific prose.
 
 ## One-pass validation
 
-At thumbnail size, verify that core 1 leads without interior granulation. At normal viewing size, verify that present core 2 remains legible and accents emerge only after both core layers. At 100%, verify the selected mechanisms rather than object examples. Reject or report when small units spread evenly; contours flicker through repeated protrusions or gaps; tone is built from patches or speckle; regular systems are reconstructed; transparent accents obscure a face or protected relation; every region has equal detail; core 2 disappears; accents become connected and dominant; omitted construction is rebuilt; the paper field is fully stained; focal landmarks drift; or the result reads as a digital filter.
+At thumbnail size, verify that core 1 leads without interior granulation. At normal viewing size, verify that present core 2 remains legible and accents emerge only after both core layers. At 100%, verify the selected mechanisms against the per-photo painting plan rather than object examples. Deterministic checks can confirm contracts and prompt meaning; only visual or semantic review can judge whether the generated image actually grouped values, kept overlaps readable, allocated edges, and omitted repeated construction.
 
 Generate once per independent attempt. A prompt that passes the deterministic checker may still fail this visual review.

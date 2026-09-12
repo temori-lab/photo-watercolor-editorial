@@ -2,9 +2,15 @@
 
 Resolve runtime capability, execution profile, semantic reading, watercolor expression, evidence, layout, face, complexity, variation, title, font, color mode, and anchor before writing. Save one version-6 `prompt-contract.json` whose runtime block exactly matches `runtime-plan.json`, then send ImageGen exactly four non-empty blocks in the order below. Put every heading on its own line, add one blank line before its body, and keep one blank line between blocks. The first three headings are shared. Use `OUTPUT CONTROL` as block four in `artifact-full`, or `TITLE AND OUTPUT` in `portable-direct`. Keep the complete brief at or below 480 English words. Emit only the selected execution-profile branch and pass the validated UTF-8 prompt bytes to ImageGen without rebuilding or concatenating them.
 
-Keep this priority: first-read core; optional explanatory second-read core; evidence and relationship; complete geometry; focal structure; selected watercolor expressions; eligible painterly accents; complexity outcomes; selected variation; watercolor field; selected title-output branch. Remove optional nuance before any contracted outcome.
+Keep this priority: first-read core; optional explanatory second-read core; evidence and relationship; complete geometry; the photo-specific painting plan; focal structure; selected watercolor expressions; eligible painterly accents; selected variation; watercolor field; selected title-output branch. The runtime, title finalizer, generation count, and internal mode labels belong outside the ImageGen text. Remove generic process prose before cutting concrete visual decisions.
+
+## Plan before prose
+
+After contracts are resolved, make the internal plan in [Photo-Specific Painting Plan](painting-decision-plan.md): first identify what must remain visible, then choose the relevant value grouping, visible transparent relation, edge allocation, and retained versus omitted detail. It is different for every source photo. Convert only its selected decisions into concrete subject and field language; do not paste it as a rigid template, force every technique, or describe an imagined physical paint sequence.
 
 ## Contract
+
+Use the photo-specific plan to spend words on visible decisions. In the first block, identify what the reference preserves and the extent of the retained support or atmosphere. In the second, describe connected value regions and the few marks that carry recognition. In the third, let medium behavior serve those shapes. Do not substitute more medium adjectives for a missing reduction decision. Keep all existing contract meanings and profile rules; concision is not a reason to drop them.
 
 Write one UTF-8 JSON object outside the prompt:
 
@@ -110,7 +116,7 @@ Run [Generation Runtime and Artifact Control](generation-runtime-contract.md) fi
 
 Keep contract labels outside the prompt. Never emit `editorial-recompose`, `poster-rebuild`, `source-locked`, `standard-editorial`, reading-mode names, `complexity_map`, `watercolor_plan`, role labels, pressure labels, expression labels, `evidence-only`, `zero source pixels`, or recipe names. Translate them into plain visual results.
 
-Use these exact plain-language interfaces:
+Express these plain-language outcomes in natural, photo-specific sentences. The checker verifies necessary meaning and contract consistency, not a canonical sentence:
 
 - photo: `Repaint the upload entirely as watercolor.` or `Place a source-faithful photograph region within the poster and keep generated watercolor in the surrounding field.`
 - composition: `Keep the subjects' order, relative scale, body axes, contact or gap, overlap, grounding, and asymmetry unchanged.` or `Improve subject placement and scale while preserving count, viewpoint, posture, relationships, and event.`
@@ -119,29 +125,21 @@ Use these exact plain-language interfaces:
 
 Pass the selected ratio through a native API size or aspect-ratio parameter whenever the interface exposes one. In the prompt, state it once as `Use a [W:H] canvas.` Never repeat an equivalent ratio or add a second explanation.
 
-After evidence and completeness, compile the selected `reading.mode` interface exactly once:
+After evidence and completeness, make the selected `reading.mode` visibly unambiguous:
 
 - `entity-led`: `Let the clearest reliable subject or relational group carry the first reading.`
 - `event-led`: `Let the visible action or interaction carry the first reading.`
 - `scene-led`: `Let the scene's main mass, route, interval, or directional structure carry the first reading.`
 - `abstract-led`: `Let source-supported color, light, mass, rhythm, and negative space carry the first reading.`
 
-Then always add:
-
-> Build the image around one clear first-read core and preserve its reliable category, event, or spatial organization.
-
-Add the selected second-read branch:
+State one protected first reading, then add the selected second-read branch:
 
 - present: `Preserve one subordinate second-read relation, event carrier, or spatial structure that makes the source-specific reading complete.`
 - absent: `A separate second-read core is unnecessary; keep the first-read core complete and unambiguous.`
 
 Add the selected painterly-accent branch. When accents are present, retain only source-supported accents that add depth, framing, rhythm, light, color, or atmosphere, with their combined salience below the first-read core or below both core layers when core 2 is present. When accents are absent, state that no additional painterly accent is needed beyond the protected core layer or layers and open paper.
 
-Then add exactly:
-
-> Omit source construction that contributes neither to the protected reading nor to the selected watercolor behavior.
-
-Add the matching viewing-scale hierarchy: core 1 leads at thumbnail size; present core 2 remains legible at normal viewing size; accents emerge only after the protected core layer or layers. Do not name discarded structures by direction, count, spacing, interval, frame, or placement. Watercolor technique never restores ineligible content.
+Say positively which parts remain, how far their explanatory extent reaches, and what replaces the rest. For a crowded source, describe the selected support or atmospheric field concretely rather than asking only for a simplified background. State that noncontributing construction is omitted, and make the viewing hierarchy clear: core 1 leads at thumbnail size; present core 2 remains legible at normal viewing size; accents emerge only after the protected core layer or layers. Keep any explicit omission concise and category-level; do not describe discarded structures by direction, count, spacing, interval, frame, or placement. Watercolor technique never restores ineligible content.
 
 Compile the selected variation using these visual results:
 
@@ -152,7 +150,7 @@ In `artifact-full`, express the contracted open area without mentioning its late
 
 ## Block 2 — `PRIMARY FORM`
 
-Compile every selected `watercolor_plan` expression exactly once:
+Use every selected `watercolor_plan` expression with its required visual meaning. Rewrite it around the source and its painting plan rather than copying a stock sentence. Do not add an expression merely to complete a checklist:
 
 - `connected-form`: `Build the first-read core as one connected silhouette or coherent field from a few broad value masses and long directional boundaries, with one clear focal area and calm interiors.`
 - `structural-wash`: `Carry a source-supported relation or spatial structure through a simplified connected wash with reduced detail and contrast.`
@@ -162,7 +160,9 @@ Compile every selected `watercolor_plan` expression exactly once:
 - `paper-reserve`: `Use open paper as active light and negative space inside the selected composition.`
 - `sparse-rhythm`: `Translate repeated source structure into a sparse interrupted rhythm with visible paper between marks.`
 
-Include each mechanism outcome selected in `core_1`, `core_2`, or `focal` exactly once. Keep accent pressures internal because the selected accent expressions already control visibility and subordination.
+Include each mechanism outcome selected in `core_1`, `core_2`, or `focal`, but make it answer the source-specific plan. Preserve only the detail that carries semantic evidence; for example, a few contour cues can distinguish a bird from dense foliage, a fold can explain a garment's action, or one plane can locate a rock beneath a cloud field. Keep accent pressures internal because the selected accent expressions already control visibility and subordination.
+
+When grouping values, name the source-derived regions that join into each mass and the recognition-bearing exceptions that remain. Make surface variation subordinate to the parent shape; a field of small dark marks does not satisfy a broad-mass instruction just because its outer envelope is connected. Keep diagnostic pattern and focal anatomy legible. Describe safe reduction without prescribing identical mass counts, lost edges, or light patterns for unrelated photos.
 
 - `micro-repetition`: `Merge repeated details into broad connected shapes with a few recognition-bearing focal accents.`
 - `contour-fragmentation`: `Absorb minor edge turns into long continuous boundaries while preserving decisive endpoints.`
@@ -179,19 +179,19 @@ Include the selected focal-mode interface from [Visual Complexity Classifier](vi
 
 State watercolor on cold-pressed paper, broad translucent washes, restrained wet-on-wet color bleeds, controlled pigment pooling, paper showing through as highlights and active negative space, and clean color separation.
 
-Compile the selected wash and field as non-objective watercolor behavior. A wash may balance the eligible composition but must not encode a discarded frame, grid, branch network, street system, or other construction. Translate the internal palette budget qualitatively:
+Compile the selected wash and field as visible watercolor behavior. A wash may balance the eligible composition but must not encode a discarded frame, grid, branch network, street system, or other construction. Describe value grouping, overlap readability, and edge distribution only where they matter to this image. Translate the internal palette budget qualitatively:
 
 - wash: a soft incomplete translucent wash; a broad wash drifting along the dominant direction; a restrained wet bloom entering from an outer edge; a low diffuse horizontal haze; or separated translucent blooms across open paper.
 - field: light and paper-led; a quiet midtone wash with generous visible paper; or a localized darker counterweight.
 - palette: `Use a very limited palette drawn from the reference.`, `Use a limited palette drawn from the reference.`, or `Use a restrained palette with moderate variation drawn from the reference.`
 
-Do not add an `Exclude` or `Avoid` inventory. End exactly with the positive surface sentence `Keep every painted form matte and tactile, with calm interiors and visible paper grain.`
+Do not add an `Exclude` or `Avoid` inventory. Close with a positive description of a matte, tactile surface with calm interiors and visible paper grain; its wording may vary.
 
 ## Block 4 — selected execution profile
 
 ### `artifact-full`
 
-Use the heading `OUTPUT CONTROL`. Do not include the actual title text or repeat title-field language. Add exactly one sentence: `Output one finished watercolor artwork with this open-paper area remaining calm, empty, and visually unmarked.`
+Use the heading `OUTPUT CONTROL`. Do not include the actual title text or repeat title-field language. Add one neutral output sentence requesting a finished watercolor artwork and an unmarked calm paper field. Do not expose title handling, Python, runtime, or generation process.
 
 ### `portable-direct`
 

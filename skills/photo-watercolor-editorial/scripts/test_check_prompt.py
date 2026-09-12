@@ -171,6 +171,22 @@ def no_second_read_prompt(prompt: str, mode: str = "scene-led") -> str:
 
 def main() -> int:
     full_prompt = COMMON_BLOCKS + FULL_TITLE_BLOCK
+    paraphrased_prompt = """SUBJECT AND COMPOSITION
+
+Paint the uploaded photograph as a watercolor on a 4:5 canvas. Recompose placement and scale, while retaining count, viewpoint, posture, relationships, and the event. Rebuild the framing, negative space, value hierarchy, and essential support. Keep the complete outer silhouette and its supported terminals inside the frame. Let the reliable subject group lead the first reading. Preserve the primary core's category, event, and spatial structure. Keep a lower-salience secondary relation so the source-specific event remains complete. Use source-supported light and framing accents only below both core layers. Discard background construction that does not contribute to the protected reading. At thumbnail size the core leads; at normal viewing size the secondary relation remains readable. Set the subject in the lower third with breathing room. Leave open paper above, and keep the top-left quiet, empty, and clearly apart from the subject. Render only the protected reading, chosen accents, and open paper.
+
+PRIMARY FORM
+
+Shape the core as a connected outer silhouette with broad value masses, long directional boundaries, and one focal area. Carry the relation as a simplified wash with reduced contrast and detail. A diluted transparent overlap stays clear of the protected structure. Turn repeated marks into sparse interrupted rhythm with paper between them; group small repeated detail into broad connected forms. Turn minor edge turns into long continuous boundaries while retaining decisive endpoints. Keep the animal's gaze, head direction, and facial color division in clean connected shapes; keep a calm face plane and a broad dark mouth with a restrained warm note. Use clear focal edges and softened outer edges, with moderate focal contrast.
+
+MEDIUM AND FIELD
+
+Use watercolor on cold-pressed paper: broad translucent washes, soft wet-on-wet bleeds, controlled pigment pooling, visible paper showing through for light and negative space, and clean color separation. Let a broad wash move with the dominant direction. Keep the field light, airy, and paper-led with a limited reference-derived palette. Leave forms matte and tactile, with calm interiors and visible paper grain.
+
+OUTPUT CONTROL
+
+Deliver a finished watercolor artwork whose open paper area remains calm and unmarked.
+"""
     portable_common = COMMON_BLOCKS.replace(
         "Keep the top-left calm and empty, with open paper and an even light value. "
         "Separate this empty area clearly from the subject. ",
@@ -179,6 +195,7 @@ def main() -> int:
     portable_prompt = portable_common + PORTABLE_TITLE_BLOCK
     cases: list[tuple[str, str, dict[str, object], bool]] = []
     cases.append(("artifact-full-valid", full_prompt, copy.deepcopy(BASE_CONTRACT), True))
+    cases.append(("paraphrased-semantic-prompt-valid", paraphrased_prompt, copy.deepcopy(BASE_CONTRACT), True))
 
     portable_contract = copy.deepcopy(BASE_CONTRACT)
     portable_contract["execution_profile"] = "portable-direct"
@@ -213,8 +230,6 @@ def main() -> int:
     cases.append(("all-protected-pressures-valid", all_pressure_prompt, all_pressures, True))
 
     for name, sentence in (
-        ("missing-reading-mode", CHECKER.READING_MODE_SENTENCES["entity-led"]),
-        ("missing-core-one", CHECKER.CORE_1_SENTENCE),
         ("missing-core-two", CHECKER.CORE_2_SENTENCES[True]),
         ("missing-accent-branch", CHECKER.ACCENT_SENTENCES[(True, True)]),
         ("missing-omission", CHECKER.OMISSION_SENTENCE),
@@ -223,6 +238,14 @@ def main() -> int:
         ("missing-transparent-glaze", CHECKER.EXPRESSION_SENTENCES["transparent-glaze"]),
     ):
         cases.append((name, full_prompt.replace(sentence + " ", ""), copy.deepcopy(BASE_CONTRACT), False))
+
+    missing_reading = full_prompt.replace("first-read", "primary").replace("first reading", "visual priority").replace("must lead", "takes priority")
+    cases.append(("missing-reading-meaning-rejected", missing_reading, copy.deepcopy(BASE_CONTRACT), False))
+    negated_core = full_prompt.replace(
+        CHECKER.CORE_1_SENTENCE,
+        "Do not preserve the primary core's category, event, or spatial organization.",
+    )
+    cases.append(("negated-required-core-rejected", negated_core, copy.deepcopy(BASE_CONTRACT), False))
 
     wrong_route = copy.deepcopy(BASE_CONTRACT)
     wrong_route["execution_profile"] = "portable-direct"
@@ -267,6 +290,11 @@ def main() -> int:
         CHECKER.EXPRESSION_SENTENCES["sparse-rhythm"] + " " + CHECKER.EXPRESSION_SENTENCES["wet-bloom"],
     )
     cases.append(("unselected-expression-rejected", unselected_expression, copy.deepcopy(BASE_CONTRACT), False))
+    semantic_expression_conflict = full_prompt.replace(
+        "\nMEDIUM AND FIELD\n",
+        " Make atmospheric soft-focus evidence into broad wet-on-wet blooms.\n\nMEDIUM AND FIELD\n",
+    )
+    cases.append(("semantic-unselected-expression-rejected", semantic_expression_conflict, copy.deepcopy(BASE_CONTRACT), False))
 
     accent_pressure_leak = full_prompt.replace(
         CHECKER.PRESSURE_SENTENCES["contour-fragmentation"],

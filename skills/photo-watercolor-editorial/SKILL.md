@@ -45,6 +45,9 @@ Always read:
 2. [Dual-Axis Watercolor Classifier](references/visual-complexity-contract.md)
 3. [Variation Engine](references/variation-engine.md)
 4. the [English prompt compiler](references/photo-watercolor-editorial-prompt.en.md)
+5. [Photo-Specific Painting Plan](references/painting-decision-plan.md)
+
+For workflow maintenance or a painting-quality diagnosis, use [Constraint Ownership](references/constraint-ownership.md) to keep deterministic safeguards separate from evidence locks and per-photo painting guidance.
 
 Read detailed contracts only when triggered:
 
@@ -64,7 +67,7 @@ Read detailed contracts only when triggered:
 5. Admit zero to two coherent painterly accent groups only when they are source-supported, compositionally useful, watercolor-translatable, and safely subordinate. Omit every form that contributes neither to the protected reading nor to selected watercolor behavior.
 6. Resolve composition geometry, design intervention, completeness, and one exact aspect ratio for the protected reading rather than omitted context.
 7. Resolve one face branch. Preserve supported human or animal facial structure independently of surrounding texture or transparent accent overlap. Reuse it as `focal_mode`; record `open_mouth` independently.
-8. Build `complexity_map` for `core_1`, optional `core_2`, `focal`, and eligible `accents`. Then assign `watercolor_plan` independently: core 1 uses connected form; core 2 uses structural wash or paper reserve; accents use transparent glaze, wet bloom, lost edge, paper reserve, or sparse rhythm. Never classify or admit content by object name.
+8. Before drafting prompt prose, write an internal photo-specific painting plan: decide what must remain visible, the explanatory extent of retained support or atmosphere, and what replaces omitted construction. Select only the relevant connected value regions, transparent relations, edge allocation, and recognition-bearing detail. Follow [Photo-Specific Painting Plan](references/painting-decision-plan.md) to make reduction visible without losing source evidence. Then build `complexity_map` for `core_1`, optional `core_2`, `focal`, and eligible `accents`, and assign `watercolor_plan` independently. This plan is a visual-intent brief, not a claim that the model performs physical wet-on-wet steps or a recipe that every photograph must follow.
 9. Freeze evidence invariants, compute the permitted variation mask, and select exactly one compatible recipe and axis set. Variation may reorganize presentation but never alter evidence.
 10. Create one natural source-grounded English title of two to five words, preferring two or three words. Choose a primary and distinct fallback corner outside protected geometry; they are preferences, not a promise that the generated base will obey them.
 11. Write one version-6 `prompt-contract.json` containing `execution_profile`, the unchanged resolver `runtime`, `semantic`, `variation`, and `artifact`. Keep `review_mode` outside this contract. Set `title_color_mode` to `auto-harmonized` unless the user requires an exact color. In `artifact-full`, run `<workspace-python> scripts/finalize_watercolor.py --contract <prompt-contract.json> --preflight`. Treat it as a normalized-font geometry audit only. Revise the title or slots when practical, but never misreport a warning as a pass and never use an aesthetic preflight warning to cancel the required ImageGen call. Then compile exactly four prompt blocks at or below 480 English words. Keep the actual title and title-focused headings out of the artifact-full prompt.
@@ -77,7 +80,7 @@ Read detailed contracts only when triggered:
 
 - Record upload roles internally. In the ImageGen prompt, describe their concrete use in plain language rather than emitting role labels such as `evidence-only`, `style-only`, or `photo target`. Never use one image as both content and style evidence.
 - Resolve `anchor_mode` before touching assets. For text-only, pass no anchor. For a selected anchor, use `scripts/resolve_assets.py --asset <logical-name>` and pass the returned path unchanged.
-- Make content eligibility explicit before rendering language. Build from one first-read core, an optional explanatory second-read core, zero to two eligible painterly accent groups, and open paper. Watercolor affinity never grants eligibility. End block one with `Show only the protected reading, selected watercolor accents, and open paper.`
+- Keep control concepts in the contract, runtime plan, and checker rather than reciting them to ImageGen. The prompt should spend its words on the selected subject, its photo-specific value grouping, visible overlaps, edge allocation, kept cues, omitted detail, and the resulting paper field. Watercolor affinity never grants eligibility.
 - Keep the JSON contract outside the ImageGen prompt. Never waive evidence, geometry, focal, complexity, profile, variation, output, or word-limit failures.
 - In `artifact-full`, keep the actual title and the later Python step outside the ImageGen prompt. Describe only calm, empty open paper with an even light value in the contracted slot.
 - Let the local engine derive the final `auto-harmonized` color from the generated watercolor. Preserve the contract color as a fallback and provenance value; never claim that a preselected hex value was visually verified before the base existed.
@@ -99,6 +102,8 @@ Read detailed contracts only when triggered:
 - Reject a resolver, checker, preflight, or finalizer run whose current interpreter differs from the workspace Python returned by the dependency loader. Never reinterpret this mismatch as missing Pillow or a valid portable downgrade.
 
 ## Style anchors
+
+This public distribution includes no photographic style anchors or examples. Use text-only direction unless the user separately provides an authorized style reference; never attempt to load assets absent from the manifest.
 
 - Default to text-only.
 - Use `primary-watercolor` only for necessary broad medium behavior that does not amplify protected-region pressures.

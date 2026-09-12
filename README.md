@@ -33,4 +33,10 @@ See [LICENSE.md](LICENSE.md) and [NOTICE.md](NOTICE.md) for the exact scope and 
 
 ## Release provenance
 
+### v1.0.1
+
+Adds a photo-specific painting plan that defines retained support and atmosphere, connects broad value regions, and protects recognition-bearing details. Prompt validation now accepts supported paraphrases while retaining missing-meaning, conflict, and negation checks.
+
+This release keeps the version before the experimental background-extent restriction. That experiment is not included. Visual trials do not establish consistent aesthetic improvement; existing source, face, geometry and deterministic title safeguards remain in place.
+
 The first public edition was prepared from private source commit `67c2ce239d31400b5c023276c585e610c1e39d4a`. Public-release packaging removes nonessential image assets and does not include later uncommitted local work.
